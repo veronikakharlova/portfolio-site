@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NDA. Мессенджер с высоким уровнем шифрования — Вероника Харлова</title>
+<meta name="description" content="Кейс: мессенджер с высоким уровнем шифрования для безопасных бизнес-коммуникаций.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --color-bg: #FAFAFA;
+    --color-bg-alt: #F5F6F8;
+    --color-text: #1C1C1E;
+    --color-text-muted: #4A4A4E;
+    --color-text-faint: #9A9AA0;
+    --color-accent: #B4573C;
+    --color-accent-bg: #F0E3DD;
+    --color-accent-text: #8A5A44;
+    --color-on-accent: #FFF7F3;
+    --radius-pill: 999px;
+    --radius-card: 18px;
+    --max-width: 760px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  a { color: inherit; }
+  img { max-width: 100%; display: block; border-radius: var(--radius-card); }
+
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* HEADER */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 48px;
+    background: rgba(250, 250, 250, 0.85);
+    backdrop-filter: blur(10px);
+  }
+
+  .site-header__name {
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+  }
+
+  .back-link {
+    text-decoration: none;
+    color: var(--color-text-muted);
+    font-size: 15px;
+    padding: 9px 16px;
+    border-radius: var(--radius-pill);
+    transition: background 0.15s ease;
+  }
+
+  .back-link:hover { background: #F0F0F1; }
+
+  /* CASE HERO */
+  .case-hero {
+    padding: 56px 0 40px;
+  }
+
+  .case-hero__meta {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .tag {
+    display: inline-block;
+    background: var(--color-accent-bg);
+    color: var(--color-accent-text);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+  }
+
+  .case-hero__title {
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 0 0 16px;
+    letter-spacing: -0.02em;
+  }
+
+  .case-hero__summary {
+    font-size: 17px;
+    color: var(--color-text-muted);
+    margin: 0 0 32px;
+    max-width: 620px;
+  }
+
+  /* PROJECT META GRID */
+  .project-meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    padding: 24px 0;
+    border-top: 1px solid #ECECEE;
+    border-bottom: 1px solid #ECECEE;
+  }
+
+  .project-meta__item-label {
+    font-size: 13px;
+    color: var(--color-text-faint);
+    margin-bottom: 6px;
+  }
+
+  .project-meta__item-value {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  /* CASE SECTIONS */
+  .case-section {
+    padding: 48px 0;
+  }
+
+  .case-section__title {
+    font-size: 22px;
+    font-weight: 500;
+    margin: 0 0 16px;
+  }
+
+  .case-section p {
+    font-size: 16px;
+    color: var(--color-text-muted);
+    margin: 0 0 16px;
+  }
+
+  .case-image {
+    margin: 32px 0;
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+  }
+
+  .case-image img {
+    border-radius: var(--radius-card);
+  }
+
+  .case-image--placeholder {
+    aspect-ratio: 16 / 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-faint);
+    font-size: 14px;
+  }
+
+  .image-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin: 32px 0;
+  }
+
+  .image-row--three {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .image-row .case-image {
+    margin: 0;
+  }
+
+  .image-caption {
+    font-size: 13px;
+    color: var(--color-text-faint);
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  /* INSIGHT QUOTE */
+  .insight-quote {
+    background: var(--color-accent-bg);
+    border-radius: var(--radius-card);
+    padding: 32px 36px;
+    margin: 32px 0;
+  }
+
+  .insight-quote p {
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--color-accent-text);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* SCREEN BLOCKS (before / hypothesis / after) */
+  .screen-block {
+    padding: 40px 0;
+    border-top: 1px solid #ECECEE;
+  }
+
+  .screen-block:first-of-type {
+    border-top: none;
+  }
+
+  .screen-block__title {
+    font-size: 19px;
+    font-weight: 500;
+    margin: 0 0 14px;
+  }
+
+  .screen-block__label {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-text-faint);
+    margin-bottom: 8px;
+  }
+
+  /* BULLET LIST */
+  .case-list {
+    margin: 0 0 16px;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .case-list li {
+    font-size: 16px;
+    color: var(--color-text-muted);
+    line-height: 1.55;
+  }
+
+  .case-list strong {
+    color: var(--color-text);
+  }
+
+  /* UI KIT NOTE */
+  .uikit-note {
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-card);
+    padding: 28px 32px;
+    margin: 32px 0;
+  }
+
+  .uikit-note__row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .uikit-note__row:last-child { margin-bottom: 0; }
+
+  .uikit-swatch {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .uikit-note__text {
+    font-size: 15px;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  .uikit-note__text strong {
+    color: var(--color-text);
+  }
+
+  /* RESULT STATS */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin: 8px 0 16px;
+  }
+
+  .stat-card {
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-card);
+    padding: 28px 20px;
+    text-align: center;
+  }
+
+  .stat-card__number {
+    font-size: 34px;
+    font-weight: 600;
+    color: var(--color-accent);
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .stat-card__label {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+  }
+
+  /* FOOTER NAV */
+  .case-footer-nav {
+    padding: 48px 0 80px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .btn {
+    text-decoration: none;
+    display: inline-block;
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+    font-size: 15px;
+    font-weight: 500;
+    padding: 12px 26px;
+    border-radius: var(--radius-pill);
+  }
+
+  @media (max-width: 640px) {
+    .site-header, .container { padding-left: 20px; padding-right: 20px; }
+    .case-hero__title { font-size: 28px; }
+    .project-meta { grid-template-columns: repeat(2, 1fr); row-gap: 20px; }
+    .image-row, .image-row--three { grid-template-columns: 1fr; }
+    .stat-grid { grid-template-columns: 1fr; }
+    .insight-quote { padding: 24px; }
+    .insight-quote p { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="../index.html" class="site-header__name">Вероника Харлова</a>
+    <a href="../index.html#projects" class="back-link">← Все проекты</a>
+  </header>
+
+  <div class="container">
+
+    <!-- БЛОК 1. ЗАГОЛОВОК + МЕТА -->
+    <section class="case-hero">
+      <div class="case-hero__meta">
+        <span class="tag">NDA · Mobile</span>
+        <span class="tag">2025</span>
+      </div>
+      <h1 class="case-hero__title">NDA. Мессенджер с высоким уровнем шифрования</h1>
+      <p class="case-hero__summary">
+        Реальное название продукта не раскрывается по условиям NDA. Спроектировала с нуля мессенджер для безопасных бизнес-коммуникаций внутри команд и организаций, работающих с конфиденциальной информацией.
+      </p>
+
+      <div class="project-meta">
+        <div>
+          <div class="project-meta__item-label">Роль</div>
+          <div class="project-meta__item-value">UX/UI дизайнер — от исследования до передачи в разработку</div>
+        </div>
+        <div>
+          <div class="project-meta__item-label">Команда</div>
+          <div class="project-meta__item-value">Продакт-менеджер, 2 бэкенд-разработчика, мобильный разработчик, 2 UX/UI дизайнера</div>
+        </div>
+        <div>
+          <div class="project-meta__item-label">Сроки</div>
+          <div class="project-meta__item-value">4 месяца — от концепта до MVP</div>
+        </div>
+        <div>
+          <div class="project-meta__item-label">Инструменты</div>
+          <div class="project-meta__item-value">Figma</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- БЛОК 2. ЗАДАЧА -->
+    <section class="case-section">
+      <h2 class="case-section__title">Задача</h2>
+      <p>Спроектировала с нуля мессенджер для безопасных бизнес-коммуникаций внутри команд и организаций, работающих с конфиденциальной информацией. До этого сотрудники такого рода компаний были вынуждены использовать обычные мессенджеры и почту для передачи документов, рискуя утечкой данных, а существующие корпоративные решения оказывались слишком сложными в настройке. Задачей было создать B2B-продукт, который прост в использовании, как популярный потребительский мессенджер, но при этом визуально и логически транслирует надёжность.</p>
+    </section>
+
+    <!-- БЛОК 3. ПРОБЛЕМА ПОЛЬЗОВАТЕЛЯ + ИНСАЙТ -->
+    <section class="case-section">
+      <h2 class="case-section__title">Проблема пользователя</h2>
+      <p>Аудитория — юристы, финансовые аналитики, HR-специалисты: люди, которые ценят своё время и понимают важность конфиденциальности, но не разбираются в криптографии. Анализ конкурентов — Signal, Telegram Secret Chats, корпоративные решения — показал разрыв: либо сложный интерфейс, пугающий терминологией, либо слишком простой, не вызывающий доверия.</p>
+
+      <div class="insight-quote">
+        <p>«Если визуализировать статусы шифрования простыми и понятными индикаторами прямо в интерфейсе чата — это повышает доверие и ощущение контроля у пользователя»</p>
+      </div>
+    </section>
+
+    <!-- БЛОК 4. ПРОЦЕСС — БЫЛО / ГИПОТЕЗА / СТАЛО -->
+    <section class="case-section">
+      <h2 class="case-section__title">Процесс: было → гипотеза → стало</h2>
+
+      <div class="screen-block">
+        <span class="screen-block__label">Экран 1</span>
+        <h3 class="screen-block__title">Настройка безопасности (онбординг)</h3>
+        <p>Гипотеза: вместо сухого технического текста про шифрование и ключи — показать процесс через понятный пошаговый флоу с минимумом текста на каждом шаге: активация аккаунта по идентификатору и настройка ПИН-кода для входа, без упоминания криптографических терминов.</p>
+        <div class="image-row image-row--three">
+          <div class="case-image">
+            <img src="../messenger/Авторизация/iPhone 14 & 15 Pro - 5.png" alt="Экран активации аккаунта по идентификатору">
+          </div>
+          <div class="case-image">
+            <img src="../messenger/Авторизация/iPhone 14 & 15 Pro - 6.png" alt="Экран настройки ПИН-кода">
+          </div>
+          <div class="case-image">
+            <img src="../messenger/Авторизация/iPhone 14 & 15 Pro - 7.png" alt="Экран задания ПИН-кода с заполненными полями">
+          </div>
+        </div>
+      </div>
+
+      <div class="screen-block">
+        <span class="screen-block__label">Экран 2</span>
+        <h3 class="screen-block__title">Авторизация</h3>
+        <p>Проблема: слабая защита входа по одному коду создавала риск взлома. Решение: добавлен «тревожный ПИН» — отдельный код, который при вводе в момент запроса обычного ПИН-кода незаметно защищает мессенджер от нежелательного доступа, блокируя приложение вместо обычного входа.</p>
+        <div class="image-row image-row--three">
+          <div class="case-image">
+            <img src="../messenger/Авторизация/iPhone 14 & 15 Pro - 8.png" alt="Экран задания тревожного ПИН-кода">
+          </div>
+          <div class="case-image">
+            <img src="../messenger/Авторизация/iPhone 14 & 15 Pro - 9.png" alt="Экран подтверждения тревожного ПИН-кода">
+          </div>
+          <div class="case-image">
+            <img src="../messenger/Авторизация/iPhone 14 & 15 Pro - 13.png" alt="Экран временной блокировки приложения">
+          </div>
+        </div>
+      </div>
+
+      <div class="screen-block">
+        <span class="screen-block__label">Экран 3</span>
+        <h3 class="screen-block__title">Настройки безопасности</h3>
+        <p>Гипотеза: сложные технические настройки нужно разделить по уровню пользователя. Решение: базовый раздел с понятными пунктами — сменить ПИН-код, сменить тревожный ПИН-код, очистить историю всех чатов, — а более чувствительные действия скрыты за отдельным подтверждением.</p>
+        <div class="image-row">
+          <div class="case-image">
+            <img src="../messenger/Настройки/Frame 1000003193.png" alt="Экран раздела настроек безопасности">
+          </div>
+          <div class="case-image">
+            <img src="../messenger/Настройки/iPhone 14 & 15 Pro - 10.png" alt="Экран изменения ПИН-кода и тревожного ПИН-кода">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- БЛОК 5. ФИНАЛЬНОЕ РЕШЕНИЕ -->
+    <section class="case-section">
+      <h2 class="case-section__title">Финальное решение</h2>
+      <ul class="case-list">
+        <li><strong>Интерфейс чата:</strong> минималистичный дизайн с крупными элементами управления, тёмная тема как основной режим для снижения визуального шума при постоянном использовании.</li>
+        <li><strong>Скомпрометированный контакт</strong> подсвечивается меткой прямо в списке чатов и контактов, чтобы пользователь сразу видел риск, не открывая переписку.</li>
+        <li><strong>Реакции на сообщения</strong> — сдержанный набор, стилизованный под общий строгий стиль интерфейса.</li>
+        <li><strong>Отправка файлов и медиа:</strong> вложения — документы, фото, видео, голосовые сообщения — отображаются прямо в ленте чата с понятной индикацией статуса доставки.</li>
+        <li><strong>Администратор</strong> может гибко настраивать права других участников группового чата — удаление сообщений, блокировка пользователей, пригласительные ссылки, проверка ПИН-кода — без риска лишних действий с их стороны.</li>
+      </ul>
+
+      <div class="image-row">
+        <div class="case-image">
+          <img src="../messenger/Чаты/Frame 1000003169.png" alt="Список чатов со скомпрометированным контактом, отмеченным меткой">
+        </div>
+        <div class="case-image">
+          <img src="../messenger/Реакции на сообщения/Chat.png" alt="Переписка с реакциями, документом и голосовыми сообщениями">
+        </div>
+      </div>
+      <div class="image-row">
+        <div class="case-image">
+          <img src="../messenger/Реакции на сообщения/Chat 21.png" alt="Экран отправки файлов и медиа в чате">
+        </div>
+        <div class="case-image">
+          <img src="../messenger/Добавление нового админа/Права админа.png" alt="Экран настройки прав администратора группового чата">
+        </div>
+      </div>
+
+      <div class="uikit-note">
+        <div class="uikit-note__row">
+          <span class="uikit-swatch" style="background:#2B2B45;"></span>
+          <span class="uikit-note__text"><strong>Цвет:</strong> тёмно-синяя основа для ощущения надёжности и профессионализма, зелёный акцент для статусов «безопасно» и «подтверждено», оранжевый — для предупреждений вместо агрессивного красного.</span>
+        </div>
+        <div class="uikit-note__row">
+          <span class="uikit-swatch" style="background:#4A6CF7;"></span>
+          <span class="uikit-note__text"><strong>Типографика:</strong> чёткий гротеск для основного текста, моноширинный шрифт — только для технической информации (коды, ключи), чтобы визуально отделять её от обычного текста.</span>
+        </div>
+        <div class="uikit-note__row">
+          <span class="uikit-swatch" style="background:#E2574C;"></span>
+          <span class="uikit-note__text"><strong>Иконки:</strong> собственный набор простых геометричных иконок; для онбординга — метафоричные иллюстрации, например «щит, обнимающий два устройства».</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- БЛОК 6. РЕЗУЛЬТАТ -->
+    <section class="case-section">
+      <h2 class="case-section__title">Результат</h2>
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-card__number">87%</div>
+          <div class="stat-card__label">пользователей без технического бэкграунда корректно прошли онбординг и поняли, как проверить безопасность сессии</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__number">4.7/5</div>
+          <div class="stat-card__label">средняя оценка удобства интерфейса по итогам юзабилити-тестирования</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__number">100%</div>
+          <div class="stat-card__label">дизайн-система и прототипы переданы в разработку в полном объёме</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- БЛОК 7. ВЫВОДЫ -->
+    <section class="case-section">
+      <h2 class="case-section__title">Выводы</h2>
+      <p>В продуктах про безопасность дизайн — это переводчик между технологией и пользователем, а успех измеряется не в битах шифрования, а в ощущении понятности и контроля. При повторном запуске заложила бы A/B-тест двух вариантов онбординга — метафоричного и прямого — с самого начала, чтобы быстрее получить данные.</p>
+      <p>Отдельным вызовом было сделать пак реакций, который не выглядит «игрушечным» в строгом интерфейсе, — решением стали минималистичная графика и приглушённая, но информативная анимация.</p>
+    </section>
+
+    <div class="case-footer-nav">
+      <a href="../index.html#projects" class="btn">К другим проектам</a>
+    </div>
+
+  </div>
+
+</body>
+</html>

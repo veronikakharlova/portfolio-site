@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Система проверки въездов и выездов через границу — Вероника Харлова</title>
+<meta name="description" content="Кейс: web-приложение для контроля несанкционированного пересечения границы.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --color-bg: #FAFAFA;
+    --color-bg-alt: #F5F6F8;
+    --color-text: #1C1C1E;
+    --color-text-muted: #4A4A4E;
+    --color-text-faint: #9A9AA0;
+    --color-accent: #B4573C;
+    --color-accent-bg: #F0E3DD;
+    --color-accent-text: #8A5A44;
+    --color-on-accent: #FFF7F3;
+    --radius-pill: 999px;
+    --radius-card: 18px;
+    --max-width: 760px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  a { color: inherit; }
+  img { max-width: 100%; display: block; border-radius: var(--radius-card); }
+
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* HEADER */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 48px;
+    background: rgba(250, 250, 250, 0.85);
+    backdrop-filter: blur(10px);
+  }
+
+  .site-header__name {
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+  }
+
+  .back-link {
+    text-decoration: none;
+    color: var(--color-text-muted);
+    font-size: 15px;
+    padding: 9px 16px;
+    border-radius: var(--radius-pill);
+    transition: background 0.15s ease;
+  }
+
+  .back-link:hover { background: #F0F0F1; }
+
+  /* CASE HERO */
+  .case-hero {
+    padding: 56px 0 40px;
+  }
+
+  .case-hero__meta {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .tag {
+    display: inline-block;
+    background: var(--color-accent-bg);
+    color: var(--color-accent-text);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+  }
+
+  .case-hero__title {
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 0 0 16px;
+    letter-spacing: -0.02em;
+  }
+
+  .case-hero__summary {
+    font-size: 17px;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  /* CASE SECTIONS */
+  .case-section {
+    padding: 40px 0;
+  }
+
+  .case-section__title {
+    font-size: 22px;
+    font-weight: 500;
+    margin: 0 0 16px;
+  }
+
+  .case-section p {
+    font-size: 16px;
+    color: var(--color-text-muted);
+    margin: 0 0 16px;
+  }
+
+  .case-image {
+    margin: 32px 0;
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-card);
+    aspect-ratio: 16 / 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-faint);
+    font-size: 14px;
+  }
+
+  /* FOOTER NAV */
+  .case-footer-nav {
+    padding: 48px 0 80px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .btn {
+    text-decoration: none;
+    display: inline-block;
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+    font-size: 15px;
+    font-weight: 500;
+    padding: 12px 26px;
+    border-radius: var(--radius-pill);
+  }
+
+  @media (max-width: 640px) {
+    .site-header, .container { padding-left: 20px; padding-right: 20px; }
+    .case-hero__title { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="../index.html" class="site-header__name">Вероника Харлова</a>
+    <a href="../index.html#projects" class="back-link">← Все проекты</a>
+  </header>
+
+  <div class="container">
+
+    <section class="case-hero">
+      <div class="case-hero__meta">
+        <span class="tag">NDA · Web</span>
+        <span class="tag">2025</span>
+      </div>
+      <h1 class="case-hero__title">Система проверки въездов и выездов через границу</h1>
+      <p class="case-hero__summary">
+        Web-приложение для сотрудников пограничного контроля — помогает быстро проверять историю пересечений границы и выявлять случаи несанкционированного въезда или выезда.
+      </p>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section__title">Задача</h2>
+      <p>Спроектировать web-приложение для сотрудников пограничного контроля, которое позволяет оперативно проверять историю пересечений границы конкретным человеком или транспортным средством и выявлять несанкционированные случаи. До этого нужные данные были разбросаны по нескольким разрозненным системам, и сотрудникам приходилось сверять их вручную — это замедляло проверку и повышало риск ошибки. Нужно было собрать всю информацию в едином интерфейсе, понятном при работе в условиях ограниченного времени на принятие решения.</p>
+    </section>
+
+    <div class="case-image">изображение / скриншот</div>
+
+    <section class="case-section">
+      <h2 class="case-section__title">Процесс</h2>
+      <p>Начала с интервью с сотрудниками пограничных служб, чтобы понять их повседневные сценарии работы и типичные проблемы в существующих инструментах. Составила карту пользовательских сценариев для разных ролей — инспектора на пункте пропуска, работающего в реальном времени, и аналитика, который позже разбирает накопленные данные.</p>
+      <p>На основе этого спроектировала структуру интерфейса: единая карточка пересечения границы с полной историей, фильтры по датам, направлениям и статусам, а также систему визуальных меток для подозрительных или повторяющихся случаев. Прототипы тестировала на сотрудниках, уточняя формулировки статусов и порядок полей в карточках — важно было, чтобы ключевая информация считывалась за секунды.</p>
+    </section>
+
+    <div class="case-image">изображение / скриншот</div>
+
+    <section class="case-section">
+      <h2 class="case-section__title">Результат</h2>
+      <p>Интерфейс объединил данные, которые раньше приходилось сверять вручную по нескольким системам, в единый экран проверки. Передала в разработку полный набор экранов, логику фильтрации и поиска, а также документацию по пограничным случаям — устаревшим данным и конфликтующим статусам.</p>
+    </section>
+
+    <div class="case-footer-nav">
+      <a href="../index.html#projects" class="btn">К другим проектам</a>
+    </div>
+
+  </div>
+
+</body>
+</html>

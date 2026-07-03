@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Вероника Харлова — UX/UI дизайнер</title>
+<meta name="description" content="Портфолио Вероники Харловой, UX/UI дизайнера. Проекты, опыт работы и образование.">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Вероника Харлова — UX/UI дизайнер">
+<meta property="og:description" content="Портфолио Вероники Харловой, UX/UI дизайнера. Проекты, опыт работы и образование.">
+<meta property="og:image" content="assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Вероника Харлова — UX/UI дизайнер">
+<meta name="twitter:description" content="Портфолио Вероники Харловой, UX/UI дизайнера. Проекты, опыт работы и образование.">
+<meta name="twitter:image" content="assets/og-image.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --color-bg: #FAFAFA;
+    --color-bg-alt: #F5F6F8;
+    --color-text: #1C1C1E;
+    --color-text-muted: #4A4A4E;
+    --color-text-faint: #9A9AA0;
+    --color-accent: #B4573C;
+    --color-accent-bg: #F0E3DD;
+    --color-accent-text: #8A5A44;
+    --color-on-accent: #FFF7F3;
+    --radius-pill: 999px;
+    --radius-card: 18px;
+    --max-width: 1120px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.5;
+  }
+
+  ::selection {
+    background: rgba(180, 90, 60, 0.18);
+  }
+
+  a {
+    color: inherit;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+
+  /* ---------- HEADER ---------- */
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 48px;
+    background: rgba(250, 250, 250, 0.85);
+    backdrop-filter: blur(10px);
+  }
+
+  .site-header__name {
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+  }
+
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .site-nav__link {
+    text-decoration: none;
+    color: var(--color-text-muted);
+    font-size: 15px;
+    padding: 9px 16px;
+    border-radius: var(--radius-pill);
+    transition: background 0.15s ease;
+  }
+
+  .site-nav__link:hover {
+    background: #F0F0F1;
+  }
+
+  .btn {
+    text-decoration: none;
+    display: inline-block;
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+    font-size: 15px;
+    font-weight: 500;
+    padding: 11px 24px;
+    border-radius: var(--radius-pill);
+    white-space: nowrap;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+  }
+
+  .btn:hover {
+    opacity: 0.9;
+  }
+
+  .btn--large {
+    font-size: 16px;
+    padding: 14px 30px;
+  }
+
+  /* ---------- HERO ---------- */
+
+  .hero {
+    display: flex;
+    align-items: center;
+    gap: 64px;
+    flex-wrap: wrap;
+    padding-top: 64px;
+    padding-bottom: 100px;
+  }
+
+  .hero__portrait-wrap {
+    flex: 1 1 380px;
+    min-width: 280px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero__portrait {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 20px 50px -20px rgba(180, 87, 60, 0.35);
+  }
+
+  .hero__portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 20%;
+    border-radius: 50%;
+  }
+
+  .hero__content {
+    flex: 2 1 420px;
+    min-width: 300px;
+    max-width: 640px;
+  }
+
+  .hero__title {
+    font-size: 44px;
+    font-weight: 500;
+    line-height: 1.15;
+    margin: 0 0 8px;
+    letter-spacing: -0.02em;
+  }
+
+  .hero__role {
+    font-size: 20px;
+    color: var(--color-accent);
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+
+  .hero__bio {
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    margin: 0 0 32px;
+    max-width: 600px;
+  }
+
+  /* ---------- SECTION HEADINGS ---------- */
+
+  section {
+    padding: 88px 0;
+  }
+
+  section.bg-alt {
+    background: var(--color-bg-alt);
+  }
+
+  .section-title {
+    font-size: 30px;
+    font-weight: 500;
+    margin: 0 0 40px;
+    letter-spacing: -0.01em;
+  }
+
+  /* ---------- PROJECTS ---------- */
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+
+  .project-card {
+    background: #FFFFFF;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    cursor: pointer;
+    transition: box-shadow 0.2s, transform 0.2s;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-card:hover {
+    box-shadow: 0 16px 40px -18px rgba(28, 28, 30, 0.18);
+    transform: translateY(-2px);
+  }
+
+  .project-card__cover {
+    width: 100%;
+    aspect-ratio: 2 / 1;
+    background: var(--color-bg-alt);
+    overflow: hidden;
+  }
+
+  .project-card__cover.has-image {
+    background: #FFFFFF;
+  }
+
+  .project-card__cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 0;
+  }
+
+  .project-card__body {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .project-card__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .project-card__tag {
+    display: inline-block;
+    background: var(--color-accent-bg);
+    color: var(--color-accent-text);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+  }
+
+  .project-card__year {
+    font-size: 14px;
+    color: var(--color-text-faint);
+  }
+
+  .project-card__title {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0 0 10px;
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+
+  .project-card__desc {
+    font-size: 15px;
+    line-height: 1.55;
+    color: #7A7A80;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+  }
+
+  /* ---------- EXPERIENCE / EDUCATION (timeline rows) ---------- */
+
+  .content-narrow {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+  }
+
+  .timeline-row {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 24px;
+  }
+
+  .timeline-row__period {
+    font-size: 14px;
+    color: var(--color-text-faint);
+    padding-top: 2px;
+  }
+
+  .timeline-row__role {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+
+  .timeline-row__company {
+    font-size: 15px;
+    color: var(--color-accent);
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+
+  .timeline-row__bullets {
+    margin: 0;
+    padding-left: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    list-style: disc;
+  }
+
+  .timeline-row__bullets li {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--color-text-muted);
+  }
+
+  .education-list {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .education-row__school {
+    font-size: 17px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .education-row__detail {
+    font-size: 15px;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  /* ---------- CONTACT ---------- */
+
+  .contact {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .contact__title {
+    font-size: 34px;
+    font-weight: 500;
+    margin: 0 0 16px;
+    letter-spacing: -0.02em;
+  }
+
+  .contact__subtitle {
+    font-size: 17px;
+    color: #7A7A80;
+    margin: 0 0 36px;
+  }
+
+  .contact__links {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+
+  .contact__link {
+    text-decoration: none;
+    color: var(--color-text);
+    font-size: 15px;
+    background: var(--color-bg-alt);
+    padding: 12px 22px;
+    border-radius: var(--radius-pill);
+    transition: background 0.15s ease;
+  }
+
+  .contact__link:hover {
+    background: #ECEDEF;
+  }
+
+  /* ---------- FOOTER ---------- */
+
+  .site-footer {
+    padding: 32px 48px;
+    background: var(--color-bg-alt);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .site-footer__copy {
+    font-size: 14px;
+    color: var(--color-text-faint);
+  }
+
+  .site-footer__links {
+    display: flex;
+    gap: 12px;
+  }
+
+  .site-footer__link {
+    text-decoration: none;
+    color: #7A7A80;
+    font-size: 14px;
+    background: #FFFFFF;
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+  }
+
+  /* ---------- ACCESSIBILITY ---------- */
+
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      transition: none !important;
+    }
+  }
+
+  /* ---------- MOBILE ---------- */
+
+  @media (max-width: 640px) {
+    .container,
+    .site-header,
+    .site-footer {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .hero {
+      padding-top: 40px;
+      padding-bottom: 60px;
+      gap: 32px;
+    }
+
+    .hero__title {
+      font-size: 32px;
+    }
+
+    section {
+      padding: 56px 0;
+    }
+
+    .timeline-row,
+    .education-row {
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <a href="#" class="site-header__name">Вероника Харлова</a>
+    <nav class="site-nav" aria-label="Основная навигация">
+      <a href="#projects" class="site-nav__link">Проекты</a>
+      <a href="#experience" class="site-nav__link">Опыт работы</a>
+      <a href="#education" class="site-nav__link">Образование</a>
+      <a href="#contact" class="site-nav__link">Контакты</a>
+    </nav>
+    <a href="#contact" class="btn">Написать</a>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero container">
+    <div class="hero__portrait-wrap">
+      <div class="hero__portrait">
+        <img src="assets/portrait.jpg" alt="Портрет Вероники Харловой">
+      </div>
+    </div>
+    <div class="hero__content">
+      <h1 class="hero__title">Вероника Харлова</h1>
+      <p class="hero__role">UX/UI дизайнер</p>
+      <p class="hero__bio">
+        UX/UI дизайнер. Три года проектирую интерфейсы для B2B-продуктов —
+        от запуска в стартапе до оптимизации в банке. Совмещаю дизайн-мышление
+        с техническим бэкграундом (C++), чтобы создавать понятные пользователям интерфейсы.
+      </p>
+      <a href="#contact" class="btn btn--large">Связаться со мной</a>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="bg-alt">
+    <div class="container">
+      <h2 class="section-title">Проекты</h2>
+      <div class="project-grid">
+
+        <a class="project-card" href="projects/messenger.html">
+          <div class="project-card__cover has-image">
+            <img src="assets/cover-messenger.jpg" alt="Обложка проекта «Мессенджер с высоким уровнем шифрования»">
+          </div>
+          <div class="project-card__body">
+            <div class="project-card__meta">
+              <span class="project-card__tag">NDA · Mobile</span>
+              <span class="project-card__year">2025</span>
+            </div>
+            <h3 class="project-card__title">Мессенджер с высоким уровнем шифрования</h3>
+            <p class="project-card__desc">Безопасный мессенджер для закрытого контура коммуникаций</p>
+          </div>
+        </a>
+
+        <a class="project-card" href="projects/border-control.html">
+          <div class="project-card__cover has-image">
+            <img src="assets/cover-border-control.jpg" alt="Обложка проекта «Система проверки въездов и выездов через границу»">
+          </div>
+          <div class="project-card__body">
+            <div class="project-card__meta">
+              <span class="project-card__tag">NDA · Web</span>
+              <span class="project-card__year">2025</span>
+            </div>
+            <h3 class="project-card__title">Проверка въездов и выездов через границу</h3>
+            <p class="project-card__desc">Web-приложение для контроля несанкционированного пересечения границы</p>
+          </div>
+        </a>
+
+        <a class="project-card" href="projects/yandex-market.html">
+          <div class="project-card__cover has-image">
+            <img src="assets/cover-yandex.jpg" alt="Обложка проекта «Реферальная программа Яндекс Плюса»">
+          </div>
+          <div class="project-card__body">
+            <div class="project-card__meta">
+              <span class="project-card__tag">Яндекс Плюс · Mobile</span>
+              <span class="project-card__year">2024</span>
+            </div>
+            <h3 class="project-card__title">Реферальная программа Яндекс Плюса</h3>
+            <p class="project-card__desc">Редизайн лендинга и экранов реферальной программы — приглашение друзей за баллы</p>
+          </div>
+        </a>
+
+        <a class="project-card" href="projects/deeplay.html">
+          <div class="project-card__cover has-image">
+            <img src="assets/cover-deeplay.jpg" alt="Обложка проекта Deeplay">
+          </div>
+          <div class="project-card__body">
+            <div class="project-card__meta">
+              <span class="project-card__tag">Web · B2B</span>
+              <span class="project-card__year">2024</span>
+            </div>
+            <h3 class="project-card__title">Deeplay — платформа для HR-аналитики</h3>
+            <p class="project-card__desc">Объединяет данные о сотрудниках, календарь HR-задач и аналитику по персоналу</p>
+          </div>
+        </a>
+
+        <a class="project-card" href="projects/brokerage.html">
+          <div class="project-card__cover has-image">
+            <img src="assets/cover-brokerage.jpg" alt="Обложка проекта «Привлечение молодёжного сегмента в брокеридж»">
+          </div>
+          <div class="project-card__body">
+            <div class="project-card__meta">
+              <span class="project-card__tag">Fintech · Проект команды</span>
+              <span class="project-card__year">2023</span>
+            </div>
+            <h3 class="project-card__title">Привлечение молодёжи в брокеридж</h3>
+            <p class="project-card__desc">Стратегия привлечения молодёжи к открытию брокерских счетов — проект занял 1 место</p>
+          </div>
+        </a>
+
+        <a class="project-card" href="projects/exchange.html">
+          <div class="project-card__cover has-image">
+            <img src="assets/cover-exchange.jpg" alt="Обложка проекта «Биржа для поиска исполнителей и заказчиков»">
+          </div>
+          <div class="project-card__body">
+            <div class="project-card__meta">
+              <span class="project-card__tag">NDA · Web</span>
+              <span class="project-card__year">2024</span>
+            </div>
+            <h3 class="project-card__title">Биржа исполнителей и заказчиков</h3>
+            <p class="project-card__desc">Личный кабинет администратора и регистрация пользователя в NDA-проекте</p>
+          </div>
+        </a>
+
+        <a class="project-card" href="projects/skinulis.html">
+          <div class="project-card__cover has-image">
+            <img src="assets/cover-skinulis.jpg" alt="Обложка проекта «Скинулись»">
+          </div>
+          <div class="project-card__body">
+            <div class="project-card__meta">
+              <span class="project-card__tag">Хакатон · Ренессанс и НИУ МЭИ</span>
+              <span class="project-card__year">2023</span>
+            </div>
+            <h3 class="project-card__title">«Скинулись» — делим счёт с друзьями</h3>
+            <p class="project-card__desc">Функция мобильного приложения Ренессанс Банка для разделения счёта между друзьями</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="container content-narrow">
+      <h2 class="section-title">Опыт работы</h2>
+      <div class="timeline">
+
+        <div class="timeline-row">
+          <div class="timeline-row__period">2025 — наст. время</div>
+          <div>
+            <div class="timeline-row__role">UX/UI дизайнер</div>
+            <div class="timeline-row__company">Lesasoft</div>
+            <ul class="timeline-row__bullets">
+              <li>Работала над проектами сибирской компании по разработке ПО на заказ Lesasoft</li>
+              <li>Спроектировала биржу для поиска исполнителей и заказчиков</li>
+              <li>Спроектировала мессенджер с высоким уровнем шифрования для закрытого контура коммуникаций</li>
+              <li>Спроектировала систему проверки въездов и выездов через границу</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-row">
+          <div class="timeline-row__period">2024 — наст. время</div>
+          <div>
+            <div class="timeline-row__role">UX/UI дизайнер</div>
+            <div class="timeline-row__company">Ренессанс Кредит</div>
+            <ul class="timeline-row__bullets">
+              <li>Проектирую интерфейсы для банковских продуктов, формирую требования к системам</li>
+              <li>Разработала единый UI-кит продукта</li>
+              <li>Победила в проекте по привлечению и удержанию пользователей в разделе «Инвестирование»</li>
+              <li>Спроектировала редизайн web-приложения для оформления кредитных заявок, запустила MVP</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-row">
+          <div class="timeline-row__period">2023 — 2024</div>
+          <div>
+            <div class="timeline-row__role">UX/UI дизайнер-стажёр</div>
+            <div class="timeline-row__company">Ренессанс Кредит</div>
+            <ul class="timeline-row__bullets">
+              <li>Выполняла задачи на стыке дизайна и фронтенд-разработки</li>
+              <li>В составе команды стажёров разработала стратегию привлечения молодёжи к открытию брокерских счетов, презентовала проект — заняли 1 место</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-row">
+          <div class="timeline-row__period">2021 — 2023</div>
+          <div>
+            <div class="timeline-row__role">Инженер-программист</div>
+            <div class="timeline-row__company">АО «НПО Лавочкина»</div>
+            <ul class="timeline-row__bullets">
+              <li>Проектировала интерфейсы в QT Designer, разрабатывала на C++ ПО для проверки параметров спутников</li>
+              <li>Проектировала наземное ПО систем управления космическими аппаратами</li>
+              <li>Участвовала в запусках метеоспутников (OneWeb, «Электро-2», «Луна-Глоб»)</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" class="bg-alt">
+    <div class="container content-narrow">
+      <h2 class="section-title">Образование</h2>
+      <div class="education-list">
+
+        <div class="timeline-row education-row">
+          <div class="timeline-row__period">2021 — 2023</div>
+          <div>
+            <div class="education-row__school">Магистр — НИУ «МЭИ», Москва</div>
+            <div class="education-row__detail">Институт информационных и вычислительных технологий · Управление и информатика в технических системах</div>
+          </div>
+        </div>
+
+        <div class="timeline-row education-row">
+          <div class="timeline-row__period">2017 — 2021</div>
+          <div>
+            <div class="education-row__school">Бакалавр — НИУ «МЭИ», Москва</div>
+            <div class="education-row__detail">Институт информационных и вычислительных технологий · Управление в технических системах</div>
+          </div>
+        </div>
+
+        <div class="timeline-row education-row">
+          <div class="timeline-row__period">2022</div>
+          <div>
+            <div class="education-row__school">Квалификация «Специалист по информационным системам»</div>
+            <div class="education-row__detail">Управление проектами: сущность и цифровые сервисы. Менеджмент. Специалист по процессному управлению и бизнес-аналитике</div>
+          </div>
+        </div>
+
+        <div class="timeline-row education-row">
+          <div class="timeline-row__period">04.2023 — 06.2023</div>
+          <div>
+            <div class="education-row__school">Проектирование интерфейсов, UX/UI дизайн</div>
+            <div class="education-row__detail">Школа дизайна Марины Абрамовой</div>
+          </div>
+        </div>
+
+        <div class="timeline-row education-row">
+          <div class="timeline-row__period">11.2023 — 04.2024</div>
+          <div>
+            <div class="education-row__school">Продуктовый подход для дизайнеров</div>
+            <div class="education-row__detail">Яндекс Практикум</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container contact">
+      <h2 class="contact__title">Обсудим ваш продукт?</h2>
+      <p class="contact__subtitle">Открыта к новым проектам</p>
+      <div class="contact__links">
+        <a href="mailto:veronika.kharlova@gmail.com" class="contact__link">veronika.kharlova@gmail.com</a>
+        <a href="https://t.me/Nika_Kharlova" class="contact__link">@Nika_Kharlova</a>
+      </div>
+      <a href="mailto:veronika.kharlova@gmail.com" class="btn btn--large">Написать</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="site-footer__copy">© Вероника Харлова, <span id="year"></span></div>
+    <div class="site-footer__links">
+      <a href="https://t.me/Nika_Kharlova" class="site-footer__link">Telegram</a>
+      <a href="mailto:veronika.kharlova@gmail.com" class="site-footer__link">Email</a>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
