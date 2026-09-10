@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RetinaResponse — Вероника Харлова</title>
+<meta name="description" content="Кейс: веб-приложение для офтальмологов — анализ электроретинограммы и классификация патологий сетчатки по частотным признакам.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --color-bg: #FAFAFA;
+    --color-bg-alt: #F5F6F8;
+    --color-text: #1C1C1E;
+    --color-text-muted: #4A4A4E;
+    --color-text-faint: #9A9AA0;
+    --color-accent: #B4573C;
+    --color-accent-bg: #F0E3DD;
+    --color-accent-text: #8A5A44;
+    --color-on-accent: #FFF7F3;
+    --radius-pill: 999px;
+    --radius-card: 18px;
+    --max-width: 760px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  a { color: inherit; }
+  img { max-width: 100%; display: block; border-radius: var(--radius-card); }
+
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* HEADER */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 48px;
+    background: rgba(250, 250, 250, 0.85);
+    backdrop-filter: blur(10px);
+  }
+
+  .site-header__name {
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+  }
+
+  .back-link {
+    text-decoration: none;
+    color: var(--color-text-muted);
+    font-size: 15px;
+    padding: 9px 16px;
+    border-radius: var(--radius-pill);
+    transition: background 0.15s ease;
+  }
+
+  .back-link:hover { background: #F0F0F1; }
+
+  /* CASE HERO */
+  .case-hero {
+    padding: 56px 0 40px;
+  }
+
+  .case-hero__meta {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .tag {
+    display: inline-block;
+    background: var(--color-accent-bg);
+    color: var(--color-accent-text);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+  }
+
+  .case-hero__title {
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 0 0 16px;
+    letter-spacing: -0.02em;
+  }
+
+  .case-hero__summary {
+    font-size: 17px;
+    color: var(--color-text-muted);
+    margin: 0 0 24px;
+    max-width: 620px;
+  }
+
+  .case-hero__link {
+    margin: 0 0 32px;
+  }
+
+  /* PROJECT META GRID */
+  .project-meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    padding: 24px 0;
+    border-top: 1px solid #ECECEE;
+    border-bottom: 1px solid #ECECEE;
+  }
+
+  .project-meta__item-label {
+    font-size: 13px;
+    color: var(--color-text-faint);
+    margin-bottom: 6px;
+  }
+
+  .project-meta__item-value {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  /* CASE SECTIONS */
+  .case-section {
+    padding: 48px 0;
+  }
+
+  .case-section__title {
+    font-size: 22px;
+    font-weight: 500;
+    margin: 0 0 16px;
+  }
+
+  .case-section__subtitle {
+    font-size: 19px;
+    font-weight: 500;
+    margin: 40px 0 14px;
+  }
+
+  .case-section__subtitle:first-of-type {
+    margin-top: 0;
+  }
+
+  .case-section p {
+    font-size: 16px;
+    color: var(--color-text-muted);
+    margin: 0 0 16px;
+  }
+
+  .case-image {
+    margin: 32px 0;
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+  }
+
+  .case-image img {
+    border-radius: var(--radius-card);
+  }
+
+  .image-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin: 32px 0;
+  }
+
+  .image-row--three {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .image-row .case-image {
+    margin: 0;
+  }
+
+  .image-caption {
+    font-size: 13px;
+    color: var(--color-text-faint);
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  /* SCREEN BLOCKS (было / гипотеза / стало) */
+  .screen-block {
+    padding: 32px 0;
+    border-top: 1px solid #ECECEE;
+  }
+
+  .screen-block:first-of-type {
+    border-top: none;
+    padding-top: 8px;
+  }
+
+  .screen-block__title {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0 0 10px;
+  }
+
+  .screen-block__label {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-text-faint);
+    margin-bottom: 8px;
+  }
+
+  /* BULLET LIST */
+  .case-list {
+    margin: 0 0 16px;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .case-list li {
+    font-size: 16px;
+    color: var(--color-text-muted);
+    line-height: 1.55;
+  }
+
+  .case-list strong {
+    color: var(--color-text);
+  }
+
+  /* COMPARISON / DATA TABLE */
+  .table-scroll {
+    overflow-x: auto;
+    margin: 32px 0;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .compare-table {
+    width: 100%;
+    min-width: 560px;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  .compare-table th,
+  .compare-table td {
+    text-align: left;
+    padding: 14px 16px;
+    border-bottom: 1px solid #ECECEE;
+    vertical-align: top;
+    line-height: 1.5;
+  }
+
+  .compare-table th {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-text-faint);
+  }
+
+  .compare-table td {
+    color: var(--color-text-muted);
+  }
+
+  .compare-table td:first-child,
+  .compare-table th:first-child {
+    font-weight: 500;
+    color: var(--color-text);
+    white-space: nowrap;
+  }
+
+  .compare-table .swatch-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .compare-table .swatch-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .compare-table .marker-glyph {
+    font-size: 15px;
+    font-weight: 700;
+    display: inline-block;
+    width: 16px;
+    text-align: center;
+  }
+
+  /* USER FLOW */
+  .flow {
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-card);
+    padding: 28px 32px;
+    margin: 32px 0;
+  }
+
+  .flow__steps {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+
+  .flow__arrow {
+    color: var(--color-text-faint);
+    font-size: 15px;
+  }
+
+  .flow__note {
+    font-size: 13px;
+    color: var(--color-text-faint);
+    margin: 0 0 16px;
+  }
+
+  .flow__branches {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .flow__branch {
+    background: #FFFFFF;
+    border-radius: 14px;
+    padding: 18px 20px;
+  }
+
+  .flow__branch-title {
+    font-size: 15px;
+    font-weight: 500;
+    margin: 6px 0 6px;
+  }
+
+  .flow__branch-desc {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .flow__extra {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  /* RESULT STATS */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin: 8px 0 16px;
+  }
+
+  .stat-card {
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-card);
+    padding: 28px 20px;
+    text-align: center;
+  }
+
+  .stat-card__number {
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--color-accent);
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .stat-card__label {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+  }
+
+  /* DESIGN TOKENS */
+  .token-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin: 32px 0;
+  }
+
+  .token-swatch {
+    background: var(--color-bg-alt);
+    border-radius: 14px;
+    padding: 14px;
+  }
+
+  .token-swatch__color {
+    width: 100%;
+    height: 44px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    border: 1px solid #ECECEE;
+  }
+
+  .token-swatch__name {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .token-swatch__desc {
+    font-size: 12px;
+    color: var(--color-text-faint);
+    line-height: 1.4;
+  }
+
+  .type-sample {
+    color: var(--color-text);
+  }
+
+  /* FOOTER NAV */
+  .case-footer-nav {
+    padding: 48px 0 80px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .btn {
+    text-decoration: none;
+    display: inline-block;
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+    font-size: 15px;
+    font-weight: 500;
+    padding: 12px 26px;
+    border-radius: var(--radius-pill);
+  }
+
+  .btn--outline {
+    background: transparent;
+    color: var(--color-accent-text);
+    border: 1px solid var(--color-accent-bg);
+  }
+
+  @media (max-width: 640px) {
+    .site-header, .container { padding-left: 20px; padding-right: 20px; }
+    .case-hero__title { font-size: 28px; }
+    .project-meta { grid-template-columns: repeat(2, 1fr); row-gap: 20px; }
+    .image-row, .image-row--three { grid-template-columns: 1fr; }
+    .stat-grid { grid-template-columns: 1fr; }
+    .flow { padding: 24px; }
+    .flow__branches { grid-template-columns: 1fr; }
+    .token-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="../index.html" class="site-header__name">Вероника Харлова</a>
+    <a href="../index.html#projects" class="back-link">← Все проекты</a>
+  </header>
+
+  <div class="container">
+
+    <!-- ЗАГОЛОВОК + МЕТА -->
+    <section class="case-hero">
+      <div class="case-hero__meta">
+        <span class="tag">Личный проект · Web</span>
+        <span class="tag">2026</span>
+      </div>
+      <h1 class="case-hero__title">RetinaResponse</h1>
+      <p class="case-hero__summary">
+        Веб-приложение для офтальмологов: анализ электроретинограммы и классификация патологий сетчатки по частотным признакам.
+      </p>
+      <p class="case-hero__link">
+        <a href="https://eye-response-app.vercel.app" class="btn btn--outline" target="_blank" rel="noopener">Открыть приложение →</a>
+      </p>
+
+      <div class="project-meta">
+        <div>
+          <div class="project-meta__item-label">Роль</div>
+          <div class="project-meta__item-value">Продуктовый дизайн и разработка — дизайн и весь код мой, включая перенос научного метода из ВКР в TypeScript</div>
+        </div>
+        <div>
+          <div class="project-meta__item-label">Команда</div>
+          <div class="project-meta__item-value">Соло-проект</div>
+        </div>
+        <div>
+          <div class="project-meta__item-label">Инструменты</div>
+          <div class="project-meta__item-value">Figma, React, TypeScript, Plotly.js, Supabase, Vercel</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ЗАДАЧА -->
+    <section class="case-section">
+      <h2 class="case-section__title">Задача</h2>
+      <p>Приложение анализирует частотную характеристику сетчатки по электроретинограмме (ОЭРГ). Сетчатка рассматривается как динамический объект: на вход подаётся периодический световой импульс, на выходе снимается ОЭРГ, оба сигнала раскладываются в ряд Фурье, и по разнице строятся частотные характеристики — АЧХ, ЛАЧХ, ФЧХ. Из них извлекается 5 числовых признаков на пациента (фаза 1-й гармоники, наклон ФЧХ, НЧ/ВЧ, НЧ, ВЧ), и по ним методом городских кварталов (Manhattan distance) новый пациент классифицируется в одну из 4 групп патологий: Норма, Миопия, Глаукома, ВМД. Метод и все данные — из собственной магистерской ВКР автора; прибор-источник данных — Roland Consult RETI-port/scan 21.</p>
+      <p>Это не новый продукт с нуля, а переработка приложения, спроектированного в самой ВКР: путь врача — от списка пациентов до классификации — там уже был продуман довольно подробно, просто как часть методологии и ТЗ к прототипу, а не как готовый работающий продукт. Моя задача была перевести этот сценарий в реально работающее веб-приложение.</p>
+      <p>Проект начинается ровно там, где заканчиваются существующие приборы и их софт: они хорошо записывают и обрабатывают сигнал, но работа с историей пациента, сравнение визитов и обычная навигация по базе стоят у них на втором плане. Это приложение не записывает сигнал и не управляет прибором — оно берёт уже посчитанные признаки и превращает их в рабочий инструмент врача: список пациентов, карточку с графиком, историю визитов, классификацию по группе.</p>
+    </section>
+
+    <!-- КОНКУРЕНТНЫЙ АНАЛИЗ -->
+    <section class="case-section">
+      <h2 class="case-section__title">Конкурентный анализ</h2>
+      <p>Классический UX-teardown экрана конкурента здесь физически невозможен сразу для всех систем на рынке — это не сайты с открытым триалом, а проприетарное ПО в комплекте с медицинским оборудованием, которое клиника покупает через отдел закупок, а не отдельный человек по подписке. Скриншот самого интерфейса публично нашёлся только у двух производителей. Поэтому вместо разбора экранов — таблица по тому, что реально можно проверить по открытым источникам.</p>
+
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Система</th>
+              <th>Заявленные возможности</th>
+              <th>Формат вывода данных</th>
+              <th>Модель доступа</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>LKC RETeval</td>
+              <td>ЭРГ + ЗВП: диабетическая ретинопатия, глаукома, наследственные дистрофии сетчатки, ишемические поражения сетчатки, педиатрия; заявлена полная совместимость со стандартом ISCEV</td>
+              <td>Цветокодированные отчёты по возрастным референсным нормам плюс сырые измерения; отдельный модуль RFF Extractor выгружает курсорные значения и кривые; заявлена интеграция с EMR/EHR</td>
+              <td>Устройство не продаётся онлайн — только демо и обращение к продажам</td>
+            </tr>
+            <tr>
+              <td>Diagnosys Espion</td>
+              <td>Sweep VEP, FST с тактильной обратной связью, ring ERG — скрининг ретинотоксичности примерно за минуту, мультифокальная ЭРГ с продольным сравнением визитов</td>
+              <td>Отдельный продукт eXporter собирает transfer-файл и текстовые файлы по каждому тесту; точный формат на сайте не раскрыт</td>
+              <td>Софт только «по запросу», публичной цены нет</td>
+            </tr>
+            <tr>
+              <td>Metrovision Vision Monitor</td>
+              <td>До 10 разных исследований на одной платформе: периметрия, тёмная хроматическая периметрия, адаптометрия, FST, электрофизиология зрения, видеоокулография</td>
+              <td>Единая база данных на все тесты, заявлен «лёгкий экспорт», формат не указан</td>
+              <td>Только форма запроса и PDF-брошюра</td>
+            </tr>
+            <tr>
+              <td>Roland Consult RETI-port/scan 21</td>
+              <td>Pattern VEP + Pattern ERG + Flash VEP, ISCEV ERG, EOG, мультифокальная ЭРГ/ЗВП, скрининг глаукомы — набор протоколов зависит от комплектации (10 уровней)</td>
+              <td>Данные хранятся во внутренней базе прибора; форматы экспорта на сайте не описаны</td>
+              <td>Только форма запроса с выбором модели — тот самый прибор, на данных которого построена эта работа</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Ни у одного производителя нет ни открытой веб-версии, ни публичной цены — весь рынок продаёт через отдел закупок клиники.</p>
+
+      <div class="image-row image-row--three">
+        <div>
+          <div class="case-image">
+            <img src="../retina-response/web-competitor-diagnosys.jpg" alt="Промо-скриншот интерфейса Diagnosys Espion V7">
+          </div>
+          <p class="image-caption">Diagnosys Espion V7</p>
+        </div>
+        <div>
+          <div class="case-image">
+            <img src="../retina-response/web-competitor-lkc.jpg" alt="Пример отчёта LKC RETeval">
+          </div>
+          <p class="image-caption">LKC RETeval</p>
+        </div>
+        <div>
+          <div class="case-image">
+            <img src="../retina-response/web-competitor-roland.jpg" alt="Рабочее место с прибором Roland Consult RETI-port/scan 21">
+          </div>
+          <p class="image-caption">Roland Consult RETI-port/scan 21</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ПОЛЬЗОВАТЕЛИ И USER FLOW -->
+    <section class="case-section">
+      <h2 class="case-section__title">Пользователи и user flow</h2>
+      <p>Формального интервью с врачами не проводилось — это стоит сказать прямо, а не скрывать. Источником для понимания пользователей стали сами тексты ВКР: в них уже описана процедура исследования и то, как реально должен работать врач с результатами.</p>
+
+      <h3 class="case-section__subtitle">Пациент</h3>
+      <p>Контекст, а не прямой пользователь приложения: процедура ЭРГ — не быстрый осмотр, а 20–30 минут адаптации к темноте плюс электроды на роговице, сосцевидном отростке и лбу, отдельно для каждого глаза. Это лишний аргумент в пользу того, чтобы результат можно было пересмотреть позже, а не потерять в бумажном отчёте.</p>
+
+      <h3 class="case-section__subtitle">Врач-офтальмолог</h3>
+      <p>Основной пользователь. Авторизация по логину и паролю открывает список пациентов именно этого врача, дальше — поиск пациента, история визитов или запуск анализа новых данных.</p>
+
+      <div class="case-image">
+        <img src="../retina-response/web-patients.jpg" alt="Список пациентов: таблица с фильтром по группам патологии и поиском">
+      </div>
+
+      <p>User flow ниже — не гипотетический, а факт того, как приложение устроено сегодня.</p>
+
+      <div class="flow">
+        <div class="flow__steps">
+          <span class="tag">Вход по логину и паролю</span>
+          <span class="flow__arrow">→</span>
+          <span class="tag">Список пациентов врача</span>
+          <span class="flow__arrow">→</span>
+          <span class="tag">Карточка пациента</span>
+        </div>
+
+        <p class="flow__note">Дальше — либо история визитов, либо запуск анализа новых данных:</p>
+
+        <div class="flow__branches">
+          <div class="flow__branch">
+            <span class="screen-block__label">Ветка 1</span>
+            <div class="flow__branch-title">История визитов</div>
+            <p class="flow__branch-desc">Просмотр уже сохранённых визитов пациента без запуска нового анализа.</p>
+          </div>
+          <div class="flow__branch">
+            <span class="screen-block__label">Ветка 2</span>
+            <div class="flow__branch-title">Запуск анализа новых данных</div>
+            <p class="flow__branch-desc">Графики сигнала (полный / выбранный диапазон / мин и макс вручную или автоматически) → числовые признаки → классификация по группе патологии методом городских кварталов.</p>
+          </div>
+        </div>
+
+        <p class="flow__extra">Из карточки пациента также можно скачать PDF графика — событие логируется. Список пациентов, кроме карточки конкретного пациента, ведёт в «Аналитику» (сводку по группам) и «Отчёты» (журнал PDF-экспортов).</p>
+      </div>
+
+      <p>Классификация в приложении показана как поддержка решения, а не как окончательный диагноз — в самой ВКР написано, что у разных патологий области значений признаков заметно пересекаются, это осложняет диагностику, и это прямо повлияло на формулировку в интерфейсе.</p>
+
+      <div class="case-image">
+        <img src="../retina-response/web-patient-detail.jpg" alt="Карточка пациента: признаки, диагноз и классификация методом городских кварталов">
+      </div>
+    </section>
+
+    <!-- ПОЧЕМУ НЕТ ВАЙРФРЕЙМОВ -->
+    <section class="case-section">
+      <h2 class="case-section__title">Почему нет вайрфреймов</h2>
+      <p>Отдельной вайрфрейм-стадии не было — экраны собирались сразу в коде, итеративно. Рисовать сейчас черновики и выдавать их за архивный артефакт значило бы дорисовать несуществовавший этап. Вместо вайрфреймов — это прямое объяснение, а настоящая демонстрация работы в Figma устроена иначе: кликабельный прототип и структура компонентов, собранные сейчас (см. блок «Дизайн-система» ниже).</p>
+    </section>
+
+    <!-- ПРОЦЕСС: БЫЛО → ПОЧЕМУ ИЗМЕНИЛА → СТАЛО -->
+    <section class="case-section">
+      <h2 class="case-section__title">Процесс: было → почему изменила → стало</h2>
+      <p>Отдельной research-стадии с интервью и гипотезами в классическом смысле здесь не было — проект вырос прямо из готовой эмпирики ВКР. Но по ходу разработки было несколько настоящих итераций, с конкретной проблемой и конкретным решением — вот все они.</p>
+
+      <div class="screen-block">
+        <span class="screen-block__label">Итерация 1 · 2021 → 2022, из самой ВКР</span>
+        <h3 class="screen-block__title">Поиск пациента</h3>
+        <p>Было: поиск по фамилии и полному возрасту. Проблема: неудобно. Стало: выпадающий список с фильтрацией по мере набора фамилии. Это не моя итерация, а задокументированная в самой ВКР — я перенесла уже готовое решение.</p>
+      </div>
+
+      <div class="screen-block">
+        <span class="screen-block__label">Итерация 2</span>
+        <h3 class="screen-block__title">Диаграмма на «Аналитике»</h3>
+        <p>Было: одна точечная диаграмма на 2 признака из 5, 4 группы патологий наложены на одном поле и сильно перекрываются. Проблема: с четырьмя категориальными сериями точечный график на пределе читаемости, а остальные 3 признака вообще не показаны. Стало: пять маленьких панелей (по одной на признак, точки — реальные визиты с детерминированным джиттером, ромб — среднее) плюс отдельный график именно для пары признаков с реальной корреляцией. Подробнее — в разделе «Датавиз: графики на «Аналитике»» ниже.</p>
+      </div>
+
+      <div class="screen-block">
+        <span class="screen-block__label">Итерация 3</span>
+        <h3 class="screen-block__title">Зум на графиках без возврата</h3>
+        <p>Было: drag-zoom на Plotly-графиках, но своя кнопка тулбара скрыта везде в приложении ради единого минималистичного набора кнопок — значит, штатного «Reset axes» тоже нет, и увеличенный график нельзя вернуть к исходному виду. Стало: своя кнопка «Сбросить» на каждом графике, где возможен зум.</p>
+      </div>
+
+      <div class="screen-block">
+        <span class="screen-block__label">Итерация 4</span>
+        <h3 class="screen-block__title">Точечная диаграмма и дальтонизм</h3>
+        <p>Было: 4 группы патологий различались только цветом точек. Проблема: два похожих оттенка (зелёный/оранжевый) читаются одинаково при дальтонизме. Стало: своя форма маркера на каждую группу — круг, квадрат, треугольник, крест — независимый от цвета канал.</p>
+      </div>
+
+      <div class="screen-block">
+        <span class="screen-block__label">Итерация 5</span>
+        <h3 class="screen-block__title">Пустое состояние в настройках</h3>
+        <p>Было: самодельный центрированный текст, если Supabase не подключён. Стало: тот же переиспользуемый компонент EmptyState, что и на «Отчётах» при пустом журнале — один компонент вместо двух похожих, но по-разному свёрстанных вручную.</p>
+      </div>
+
+      <div class="screen-block">
+        <span class="screen-block__label">Итерация 6</span>
+        <h3 class="screen-block__title">Данные НЧ/ВЧ</h3>
+        <p>Было: у 21 из 60 визитов сохранённое значение НЧ/ВЧ расходилось с результатом НЧ ÷ ВЧ по отдельным значениям — где-то на 0.05, где-то заметно больше (до 0.5). Стало: пересчитала все 21 как НЧ ÷ ВЧ, тем же способом, каким это уже считается для новых визитов при добавлении — с побочным эффектом, который не стала прятать: точность классификации на «Аналитике» пересчиталась с 63% на 62%.</p>
+      </div>
+    </section>
+
+    <!-- ВИЗУАЛЬНЫЙ СТИЛЬ -->
+    <section class="case-section">
+      <h2 class="case-section__title">Визуальный стиль</h2>
+      <p>Отдельного визуального редизайна в этом кейсе нет, и это тоже решение — систему стоит показать такой, какая она есть. Шрифт держится на двух начертаниях на весь интерфейс (обычное для текста, более плотное для заголовков), с парой объяснённых размером исключений на самых мелких элементах. Цвет устроен так же системно — один набор ролей (фон, текст, акцент, рамка, предупреждение/подтверждение), переиспользуемых везде, ни один экран не придумывает свой оттенок под задачу. Карточка данных — один и тот же переиспользуемый компонент на десяти разных страницах.</p>
+      <p>Доступность для дальтоников — место, где было реальное исправление: на графике ЭРГ кривая пациента и кривая нормы различались сразу и цветом, и типом линии; а на точечной диаграмме «Аналитики» четыре группы патологий сначала различались только цветом — добавлена отдельная форма маркера на каждую группу (см. итерацию 4 выше).</p>
+    </section>
+
+    <!-- ДАТАВИЗ: CSFCHART -->
+    <section class="case-section">
+      <h2 class="case-section__title">Датавиз: CSFChart</h2>
+      <p>Локальная легенда на каждой панели вместо одной общей на весь график — АЧХ, ЛАЧХ и ФЧХ показывают разные величины на разных осях, общая легенда заставляла бы взгляд каждый раз уходить в другой конец экрана. Драг-зум на графике синхронизирован с числовыми полями диапазона под ним — не два независимых способа задать диапазон, а один интерфейс с двумя точками входа. Ось ЛАЧХ логарифмическая по декадам — не выбор библиотеки по умолчанию, а то, как этот параметр строится в самой методике; без логарифмической шкалы график терял бы форму частотной характеристики.</p>
+
+      <div class="case-image">
+        <img src="../retina-response/web-csfchart-closeup.jpg" alt="Крупный план на CSFChart: панели АЧХ, ЛАЧХ и ФЧХ с локальными легендами и синхронизированным диапазоном">
+      </div>
+    </section>
+
+    <!-- ДАТАВИЗ: АНАЛИТИКА -->
+    <section class="case-section">
+      <h2 class="case-section__title">Датавиз: графики на «Аналитике»</h2>
+      <p>Первый график — пять маленьких панелей (2×3, та же сетка, что у диаграммы средних выше на странице), по одной на признак. Внутри каждой панели у группы патологии своя колонка по X вместо общего поля — точки соседствуют, а не накладываются. Реальные визиты разнесены детерминированным псевдослучайным сдвигом (одна и та же точка при пересборке страницы всегда на одном месте, не «прыгает»), поверх — ромб со средним по группе.</p>
+      <p>Второй график — отдельная диаграмма для пары «фаза 1-й гармоники × наклон ФЧХ»: единственная пара, где обе величины растут в одном порядке патологий. Подписана не только словом «корреляция», но и числом — коэффициентом Пирсона (0.88) — чтобы утверждение было проверяемым, а не «на глаз».</p>
+      <p>У обоих графиков — своя кнопка «Сбросить» (см. итерацию 3 в разделе «Процесс» выше).</p>
+
+      <div class="case-image">
+        <img src="../retina-response/web-analytics.jpg" alt="Страница «Аналитика»: средние по группам, разброс по пациентам на пяти панелях, график корреляции, точность классификации">
+      </div>
+    </section>
+
+    <!-- ПРОБЕЛЫ ПОКАЗАНЫ, А НЕ ЗАМАСКИРОВАНЫ -->
+    <section class="case-section">
+      <h2 class="case-section__title">Пробелы показаны, а не замаскированы</h2>
+      <p>Сквозной принцип проекта: если данных для чего-то не хватает или метод даёт неидеальный результат, это показывается прямо, а не маскируется под уверенный интерфейс. Три примера:</p>
+
+      <ul class="case-list">
+        <li><strong>Расхождение с историческими данными.</strong> Старый метод расчёта был настроен под один конкретный исторический файл. Приложение берёт параметры из каждого нового файла, а не притворяется, что все файлы одинаковые — и прямо пишет об этом пользователю под графиком: цифры по новому файлу не обязаны один в один совпадать с историческими значениями из ВКР.</li>
+        <li><strong>Колокольчик уведомлений без выдуманной активности.</strong> Только то, что и так уже посчитано или сохранено — расхождение классификации с диагнозом (тот же результат, что и в общем списке, просто на видном месте) и реально недавно добавленные пациенты по настоящей дате создания. В демо-режиме без базы вторая категория просто пуста — не баг, а прямое следствие того, что придумывать «недавно добавленных» не из чего.</li>
+        <li><strong>Пустое состояние вместо нуля из ниоткуда.</strong> Журнал PDF-экспортов на «Отчётах» — три разных состояния (база не подключена / база подключена, но пусто / есть записи), каждое объясняет, почему оно выглядит именно так.</li>
+      </ul>
+
+      <div class="image-row">
+        <div class="case-image">
+          <img src="../retina-response/web-notifications.jpg" alt="Открытая панель уведомлений: расхождение классификации и недавно добавленные пациенты">
+        </div>
+        <div class="case-image">
+          <img src="../retina-response/web-reports.jpg" alt="Страница «Отчёты»: журнал PDF-экспортов с пустым состоянием, когда база не подключена">
+        </div>
+      </div>
+    </section>
+
+    <!-- ПЕРЕНОС НАУЧНОГО МЕТОДА -->
+    <section class="case-section">
+      <h2 class="case-section__title">Перенос научного метода в интерфейс</h2>
+      <p>Ядро приложения — графики частотных характеристик — не из готовой библиотеки, а перенесено из расчётного метода, использованного в самой магистерской ВКР: реальный сигнал сравнивается с эталонным, по разнице строятся частотные характеристики. Перенос не был точной копией — в историческом расчёте было несколько «заплаток», завязанных на один конкретный исторический файл (пара мест, где значения вручную обнулялись из-за помехи в этом файле). Они не имеют смысла для любого другого сигнала, поэтому в приложении их нет, и это явно задокументировано, а не тихо убрано.</p>
+
+      <div class="image-row">
+        <div class="case-image">
+          <img src="../retina-response/web-about.jpg" alt="Страница «О проекте»: методика, признаки и данные">
+        </div>
+        <div class="case-image">
+          <img src="../retina-response/web-help.jpg" alt="Страница «Помощь»: как читать графики, загрузка с прибора, уведомления, экспорт PDF">
+        </div>
+      </div>
+    </section>
+
+    <!-- ПРИВАТНОСТЬ ДАННЫХ -->
+    <section class="case-section">
+      <h2 class="case-section__title">Приватность данных как дизайн-решение</h2>
+      <p>Без входа в систему нельзя ни посмотреть, ни изменить ни одной записи — анонимные запросы к базе запрещены на уровне самой базы, а не только интерфейса. Сейчас это простой барьер «без входа доступа нет вообще» (проект однопользовательский), а не разграничение по врачам — план на это уже есть в схеме, если проект станет многопользовательским.</p>
+      <p>У девяти пациентов группы «Миопия» в исходных материалах ВКР есть настоящие имена и даты рождения — они физически не попадают ни в публичный код, ни в собранную версию приложения (проверено полной сборкой с файлом на месте и без него). Публичная демо-версия и вовсе использует только полностью придуманные имена и даты для всех 30 пациентов.</p>
+    </section>
+
+    <!-- ЧТО ПОЯВИЛОСЬ ПО ХОДУ РАЗРАБОТКИ -->
+    <section class="case-section">
+      <h2 class="case-section__title">Что появилось по ходу разработки</h2>
+      <p>Профиль врача в настройках сделан нередактируемым осознанно: имя и специализацию задаёт администратор клиники при создании аккаунта, а к врачу относится только смена пароля (с проверкой старого — важно для общего компьютера в кабинете). Экспорт в PDF работает без единой сторонней библиотеки — через системный диалог печати браузера с настройкой, скрывающей всё, кроме графика. Точность классификации на «Аналитике» пересчитывается заново при каждой загрузке страницы, а не зашита цитатой из диплома.</p>
+
+      <div class="case-image">
+        <img src="../retina-response/web-settings.jpg" alt="Настройки врача: нередактируемый профиль и смена пароля">
+      </div>
+    </section>
+
+    <!-- РЕЗУЛЬТАТ -->
+    <section class="case-section">
+      <h2 class="case-section__title">Результат</h2>
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-card__number">69 / 137</div>
+          <div class="stat-card__label">визитов / глаз по 4 группам патологий — реальные числовые признаки из ВКР, не выдуманные</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__number">62% (37/60)</div>
+          <div class="stat-card__label">точность классификации методом городских кварталов на текущих данных — пересчитывается заново, не статичное число</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__number">C++ → TS</div>
+          <div class="stat-card__label">полный перенос научного метода из readFile.cpp (Приложение А ВКР) в TypeScript, с задокументированными отступлениями от исторических «заплаток»</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ДИЗАЙН-СИСТЕМА -->
+    <section class="case-section">
+      <h2 class="case-section__title">Дизайн-система</h2>
+      <p>Прототип в Figma — ссылка появится позже, когда будет собран кликабельный прототип.</p>
+
+      <h3 class="case-section__subtitle">Цветовые токены — основные UI-роли</h3>
+      <div class="token-grid">
+        <div class="token-swatch">
+          <div class="token-swatch__color" style="background:#f7f7fb;"></div>
+          <div class="token-swatch__name">--bg</div>
+          <div class="token-swatch__desc">#f7f7fb — фон страницы</div>
+        </div>
+        <div class="token-swatch">
+          <div class="token-swatch__color" style="background:#ffffff;"></div>
+          <div class="token-swatch__name">--surface</div>
+          <div class="token-swatch__desc">#ffffff — фон карточек</div>
+        </div>
+        <div class="token-swatch">
+          <div class="token-swatch__color" style="background:#f3f2fb;"></div>
+          <div class="token-swatch__name">--surface-muted</div>
+          <div class="token-swatch__desc">#f3f2fb — приглушённый фон, пустые состояния</div>
+        </div>
+        <div class="token-swatch">
+          <div class="token-swatch__color" style="background:#17181f;"></div>
+          <div class="token-swatch__name">--text</div>
+          <div class="token-swatch__desc">#17181f — основной текст</div>
+        </div>
+        <div class="token-swatch">
+          <div class="token-swatch__color" style="background:#6b7080;"></div>
+          <div class="token-swatch__name">--muted</div>
+          <div class="token-swatch__desc">#6b7080 — приглушённый текст, подписи</div>
+        </div>
+        <div class="token-swatch">
+          <div class="token-swatch__color" style="background:#6a5cf0;"></div>
+          <div class="token-swatch__name">--accent</div>
+          <div class="token-swatch__desc">#6a5cf0 — акцент: кнопки, активные элементы</div>
+        </div>
+        <div class="token-swatch">
+          <div class="token-swatch__color" style="background:#efedfe;"></div>
+          <div class="token-swatch__name">--accent-soft</div>
+          <div class="token-swatch__desc">#efedfe — мягкий фон под акцентом</div>
+        </div>
+        <div class="token-swatch">
+          <div class="token-swatch__color" style="background:#4c3fd1;"></div>
+          <div class="token-swatch__name">--accent-text</div>
+          <div class="token-swatch__desc">#4c3fd1 — акцентный текст на светлом фоне</div>
+        </div>
+        <div class="token-swatch">
+          <div class="token-swatch__color" style="background:#ececf3;"></div>
+          <div class="token-swatch__name">--border</div>
+          <div class="token-swatch__desc">#ececf3 — рамки, разделители</div>
+        </div>
+        <div class="token-swatch">
+          <div class="token-swatch__color" style="background:#fbeee3;"></div>
+          <div class="token-swatch__name">--warn-bg / --warn-text</div>
+          <div class="token-swatch__desc">#fbeee3 / #8a4b1f — предупреждение</div>
+        </div>
+        <div class="token-swatch">
+          <div class="token-swatch__color" style="background:#e7eaf1;"></div>
+          <div class="token-swatch__name">--ok-bg / --ok-text</div>
+          <div class="token-swatch__desc">#e7eaf1 / #151a24 — подтверждение/нейтральный статус</div>
+        </div>
+      </div>
+
+      <h3 class="case-section__subtitle">Категориальные токены — группы патологий и графики</h3>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Роль</th>
+              <th>Цвет</th>
+              <th>Форма маркера</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Норма</td>
+              <td class="swatch-cell"><span class="swatch-dot" style="background:#2f9e6b;"></span>#2f9e6b</td>
+              <td><span class="marker-glyph" style="color:#2f9e6b;">●</span> круг</td>
+            </tr>
+            <tr>
+              <td>Миопия</td>
+              <td class="swatch-cell"><span class="swatch-dot" style="background:#3b82f6;"></span>#3b82f6</td>
+              <td><span class="marker-glyph" style="color:#3b82f6;">■</span> квадрат</td>
+            </tr>
+            <tr>
+              <td>ВМД</td>
+              <td class="swatch-cell"><span class="swatch-dot" style="background:#d6336c;"></span>#d6336c</td>
+              <td><span class="marker-glyph" style="color:#d6336c;">▲</span> треугольник</td>
+            </tr>
+            <tr>
+              <td>Глаукома</td>
+              <td class="swatch-cell"><span class="swatch-dot" style="background:#f59e0b;"></span>#f59e0b</td>
+              <td><span class="marker-glyph" style="color:#f59e0b;">✕</span> крест</td>
+            </tr>
+            <tr>
+              <td>Кривая пациента</td>
+              <td class="swatch-cell"><span class="swatch-dot" style="background:#1d4fe8;"></span>#1d4fe8</td>
+              <td>сплошная линия</td>
+            </tr>
+            <tr>
+              <td>Кривая нормы</td>
+              <td class="swatch-cell"><span class="swatch-dot" style="background:#94a3b8;"></span>#94a3b8</td>
+              <td>пунктирная линия</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="case-section__subtitle">Типографическая шкала</h3>
+      <p>Шрифт — Inter, семь ступеней, начертания 400/600, плюс вариант 700 на самом мелком элементе.</p>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Стиль</th>
+              <th>Размер / начертание</th>
+              <th>Пример</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Заголовок страницы</td>
+              <td>28px / 600</td>
+              <td><span class="type-sample" style="font-size:28px; font-weight:600;">Пациенты</span></td>
+            </tr>
+            <tr>
+              <td>Заголовок раздела</td>
+              <td>22px / 600</td>
+              <td><span class="type-sample" style="font-size:22px; font-weight:600;">Средние по группам</span></td>
+            </tr>
+            <tr>
+              <td>Заголовок карточки/модалки</td>
+              <td>16px / 600</td>
+              <td><span class="type-sample" style="font-size:16px; font-weight:600;">Признаки пациента</span></td>
+            </tr>
+            <tr>
+              <td>Подзаголовок</td>
+              <td>14px / 600</td>
+              <td><span class="type-sample" style="font-size:14px; font-weight:600;">Диапазон, Гц</span></td>
+            </tr>
+            <tr>
+              <td>Основной текст</td>
+              <td>13px / 400</td>
+              <td><span class="type-sample" style="font-size:13px; font-weight:400;">Ближе всего к группе Норма</span></td>
+            </tr>
+            <tr>
+              <td>Вторичный текст</td>
+              <td>12px / 400</td>
+              <td><span class="type-sample" style="font-size:12px; font-weight:400;">Не диагноз, а сверка признаков</span></td>
+            </tr>
+            <tr>
+              <td>Мелкая метка</td>
+              <td>11px / 600, вариант 11px / 700 для счётчика-бейджа</td>
+              <td><span class="type-sample" style="font-size:11px; font-weight:700;">16</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="case-section__subtitle">Компоненты</h3>
+      <ul class="case-list">
+        <li><strong>Карточка данных</strong> (data-card) — на 10+ страницах.</li>
+        <li><strong>Чип патологии</strong> — 4 цвета + текст.</li>
+        <li><strong>Кнопка «Сбросить»</strong> — для графиков с зумом.</li>
+        <li><strong>EmptyState</strong> — три содержательных состояния вместо нуля из ниоткуда.</li>
+        <li><strong>Таблица пациентов</strong> — с фильтрами.</li>
+      </ul>
+    </section>
+
+    <div class="case-footer-nav">
+      <a href="../index.html#projects" class="btn">К другим проектам</a>
+    </div>
+
+  </div>
+
+</body>
+</html>
