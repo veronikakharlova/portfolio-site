@@ -235,6 +235,51 @@
     margin-bottom: 8px;
   }
 
+  .screen-block__note {
+    font-size: 15px;
+    color: var(--color-text-muted);
+    margin: 14px 0 0;
+  }
+
+  /* CHANGE CARDS (было / стало) */
+  .change-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .change-card {
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-card);
+    padding: 20px;
+  }
+
+  .change-card--after {
+    background: var(--color-accent-bg);
+  }
+
+  .change-card__label {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-text-faint);
+    margin-bottom: 8px;
+  }
+
+  .change-card--after .change-card__label {
+    color: var(--color-accent-text);
+  }
+
+  .change-card p {
+    font-size: 15px;
+    color: var(--color-text-muted);
+    margin: 0;
+    line-height: 1.55;
+  }
+
   /* BULLET LIST */
   .case-list {
     margin: 0 0 16px;
@@ -413,6 +458,7 @@
     .case-hero__title { font-size: 28px; }
     .project-meta { grid-template-columns: repeat(2, 1fr); row-gap: 20px; }
     .image-row, .image-row--three { grid-template-columns: 1fr; }
+    .change-cards { grid-template-columns: 1fr; }
     .stat-grid { grid-template-columns: 1fr; }
     .token-grid { grid-template-columns: repeat(2, 1fr); }
   }
@@ -591,37 +637,95 @@
       <div class="screen-block">
         <span class="screen-block__label">Итерация 1 · 2021 → 2022, из самой ВКР</span>
         <h3 class="screen-block__title">Поиск пациента</h3>
-        <p>Было: поиск по фамилии и полному возрасту. Проблема: неудобно. Стало: выпадающий список с фильтрацией по мере набора фамилии. Решение задокументировано в самой ВКР, я перенесла его как есть.</p>
+        <div class="change-cards">
+          <div class="change-card">
+            <span class="change-card__label">Было</span>
+            <p>Поиск по фамилии и полному возрасту — неудобно.</p>
+          </div>
+          <div class="change-card change-card--after">
+            <span class="change-card__label">Стало</span>
+            <p>Выпадающий список с фильтрацией по мере набора фамилии.</p>
+          </div>
+        </div>
+        <p class="screen-block__note">Решение задокументировано в самой ВКР, я перенесла его как есть.</p>
       </div>
 
       <div class="screen-block">
         <span class="screen-block__label">Итерация 2</span>
         <h3 class="screen-block__title">Диаграмма на «Аналитике»</h3>
-        <p>Было: одна точечная диаграмма на 2 признака из 5, 4 группы патологий наложены на одном поле и сильно перекрываются. Проблема: с четырьмя категориальными сериями точечный график на пределе читаемости, а остальные 3 признака вообще не показаны. Стало: пять маленьких панелей (по одной на признак; точки обозначают реальные визиты с детерминированным джиттером, ромб обозначает среднее) плюс отдельный график именно для пары признаков с реальной корреляцией. Подробнее в разделе «Датавиз: графики на «Аналитике»» ниже.</p>
+        <div class="change-cards">
+          <div class="change-card">
+            <span class="change-card__label">Было</span>
+            <p>Одна точечная диаграмма на 2 признака из 5. Четыре группы патологий наложены на одном поле и сильно перекрываются: с четырьмя категориальными сериями график на пределе читаемости, а остальные 3 признака вообще не показаны.</p>
+          </div>
+          <div class="change-card change-card--after">
+            <span class="change-card__label">Стало</span>
+            <p>Пять маленьких панелей — по одной на признак (точки обозначают реальные визиты с детерминированным джиттером, ромб — среднее), плюс отдельный график именно для пары признаков с реальной корреляцией.</p>
+          </div>
+        </div>
+        <p class="screen-block__note">Подробнее в разделе «Датавиз: графики на «Аналитике»» ниже.</p>
       </div>
 
       <div class="screen-block">
         <span class="screen-block__label">Итерация 3</span>
         <h3 class="screen-block__title">Зум на графиках без возврата</h3>
-        <p>Было: drag-zoom на Plotly-графиках, но своя кнопка тулбара скрыта везде в приложении ради единого минималистичного набора кнопок. Значит, штатного «Reset axes» тоже нет, и увеличенный график нельзя вернуть к исходному виду. Стало: своя кнопка «Сбросить» на каждом графике, где возможен зум.</p>
+        <div class="change-cards">
+          <div class="change-card">
+            <span class="change-card__label">Было</span>
+            <p>Drag-zoom на Plotly-графиках работал, но своя кнопка тулбара скрыта везде в приложении ради единого минималистичного набора кнопок. Штатного «Reset axes» тоже нет, поэтому увеличенный график нельзя вернуть к исходному виду.</p>
+          </div>
+          <div class="change-card change-card--after">
+            <span class="change-card__label">Стало</span>
+            <p>Своя кнопка «Сбросить» на каждом графике, где возможен зум.</p>
+          </div>
+        </div>
       </div>
 
       <div class="screen-block">
         <span class="screen-block__label">Итерация 4</span>
         <h3 class="screen-block__title">Точечная диаграмма и дальтонизм</h3>
-        <p>Было: 4 группы патологий различались только цветом точек. Проблема: два похожих оттенка (зелёный/оранжевый) читаются одинаково при дальтонизме. Стало: своя форма маркера на каждую группу: круг, квадрат, треугольник, крест. Эта форма не зависит от цвета.</p>
+        <div class="change-cards">
+          <div class="change-card">
+            <span class="change-card__label">Было</span>
+            <p>4 группы патологий различались только цветом точек. Два похожих оттенка (зелёный/оранжевый) читаются одинаково при дальтонизме.</p>
+          </div>
+          <div class="change-card change-card--after">
+            <span class="change-card__label">Стало</span>
+            <p>Своя форма маркера на каждую группу: круг, квадрат, треугольник, крест. Эта форма не зависит от цвета.</p>
+          </div>
+        </div>
       </div>
 
       <div class="screen-block">
         <span class="screen-block__label">Итерация 5</span>
         <h3 class="screen-block__title">Пустое состояние в настройках</h3>
-        <p>Было: самодельный центрированный текст, если Supabase не подключён. Стало: тот же переиспользуемый компонент EmptyState, что и на «Отчётах» при пустом журнале. Один компонент вместо двух похожих, но по-разному свёрстанных вручную.</p>
+        <div class="change-cards">
+          <div class="change-card">
+            <span class="change-card__label">Было</span>
+            <p>Самодельный центрированный текст, если Supabase не подключён.</p>
+          </div>
+          <div class="change-card change-card--after">
+            <span class="change-card__label">Стало</span>
+            <p>Тот же переиспользуемый компонент EmptyState, что и на «Отчётах» при пустом журнале.</p>
+          </div>
+        </div>
+        <p class="screen-block__note">Один компонент вместо двух похожих, но по-разному свёрстанных вручную.</p>
       </div>
 
       <div class="screen-block">
         <span class="screen-block__label">Итерация 6</span>
         <h3 class="screen-block__title">Данные НЧ/ВЧ</h3>
-        <p>Было: у 21 из 60 визитов сохранённое значение НЧ/ВЧ расходилось с результатом НЧ ÷ ВЧ по отдельным значениям: где-то на 0.05, где-то заметно больше (до 0.5). Стало: пересчитала все 21 как НЧ ÷ ВЧ, тем же способом, каким это уже считается для новых визитов при добавлении. Точность классификации на «Аналитике» пересчиталась с 63% на 62%.</p>
+        <div class="change-cards">
+          <div class="change-card">
+            <span class="change-card__label">Было</span>
+            <p>У 21 из 60 визитов сохранённое значение НЧ/ВЧ расходилось с результатом НЧ ÷ ВЧ по отдельным значениям: где-то на 0.05, где-то заметно больше (до 0.5).</p>
+          </div>
+          <div class="change-card change-card--after">
+            <span class="change-card__label">Стало</span>
+            <p>Пересчитала все 21 как НЧ ÷ ВЧ, тем же способом, каким это уже считается для новых визитов при добавлении.</p>
+          </div>
+        </div>
+        <p class="screen-block__note">Точность классификации на «Аналитике» пересчиталась с 63% на 62%.</p>
       </div>
     </section>
 
