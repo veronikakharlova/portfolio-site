@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Подтверждение дохода через Госуслуги — Вероника Харлова</title>
+<meta name="description" content="Кейс: новый процесс подтверждения дохода через Госуслуги во внутренней системе банка — сценарии, состояния, интерфейс, компоненты и UI kit.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --color-bg: #FAFAFA;
+    --color-bg-alt: #F5F6F8;
+    --color-text: #1C1C1E;
+    --color-text-muted: #4A4A4E;
+    --color-text-faint: #9A9AA0;
+    --color-accent: #B4573C;
+    --color-accent-bg: #F0E3DD;
+    --color-accent-text: #8A5A44;
+    --color-on-accent: #FFF7F3;
+    --radius-pill: 999px;
+    --radius-card: 18px;
+    --max-width: 920px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  a { color: inherit; }
+  img { max-width: 100%; display: block; border-radius: var(--radius-card); }
+
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* HEADER */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 48px;
+    background: rgba(250, 250, 250, 0.85);
+    backdrop-filter: blur(10px);
+  }
+
+  .site-header__name {
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+  }
+
+  .back-link {
+    text-decoration: none;
+    color: var(--color-text-muted);
+    font-size: 15px;
+    padding: 9px 16px;
+    border-radius: var(--radius-pill);
+    transition: background 0.15s ease;
+  }
+
+  .back-link:hover { background: #F0F0F1; }
+
+  .case-hero__back {
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+
+  /* CASE HERO */
+  .case-hero {
+    padding: 56px 0 40px;
+  }
+
+  .case-hero__meta {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .tag {
+    display: inline-block;
+    background: var(--color-accent-bg);
+    color: var(--color-accent-text);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+  }
+
+  .case-hero__title {
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 0 0 16px;
+    letter-spacing: -0.02em;
+  }
+
+  .case-hero__summary {
+    font-size: 17px;
+    color: var(--color-text-muted);
+    margin: 0 0 32px;
+    max-width: 620px;
+  }
+
+  /* PROJECT META GRID */
+  .project-meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    padding: 24px 0;
+    border-top: 1px solid #ECECEE;
+    border-bottom: 1px solid #ECECEE;
+  }
+
+  .project-meta__item-label {
+    font-size: 13px;
+    color: var(--color-text-faint);
+    margin-bottom: 6px;
+  }
+
+  .project-meta__item-value {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  /* CASE SECTIONS */
+  .case-section {
+    padding: 40px 0;
+  }
+
+  .case-section__title {
+    font-size: 22px;
+    font-weight: 500;
+    margin: 0 0 16px;
+  }
+
+  .case-section p {
+    font-size: 16px;
+    color: var(--color-text-muted);
+    margin: 0 0 16px;
+  }
+
+  .case-image {
+    margin: 32px 0;
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+  }
+
+  .case-image img {
+    border-radius: var(--radius-card);
+  }
+
+  .image-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin: 32px 0;
+  }
+
+  .image-row--three {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .image-row .case-image {
+    margin: 0;
+  }
+
+  .image-caption {
+    font-size: 13px;
+    color: var(--color-text-faint);
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .case-section__subtitle {
+    font-size: 19px;
+    font-weight: 500;
+    margin: 40px 0 14px;
+  }
+
+  /* BULLET LIST */
+  .case-list {
+    margin: 0 0 16px;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .case-list li {
+    font-size: 16px;
+    color: var(--color-text-muted);
+    line-height: 1.55;
+  }
+
+  .case-list strong {
+    color: var(--color-text);
+  }
+
+  /* FOOTER NAV */
+  .case-footer-nav {
+    padding: 48px 0 80px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .btn {
+    text-decoration: none;
+    display: inline-block;
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+    font-size: 15px;
+    font-weight: 500;
+    padding: 12px 26px;
+    border-radius: var(--radius-pill);
+  }
+
+  @media (max-width: 640px) {
+    .site-header, .container { padding-left: 20px; padding-right: 20px; }
+    .case-hero__title { font-size: 28px; }
+    .project-meta { grid-template-columns: repeat(2, 1fr); row-gap: 20px; }
+    .image-row, .image-row--three { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="../index.html" class="site-header__name">Вероника Харлова</a>
+  </header>
+
+  <div class="container">
+
+    <section class="case-hero">
+      <a href="../index.html#projects" class="back-link case-hero__back">← Все проекты</a>
+      <div class="case-hero__meta">
+        <span class="tag">NDA · Web</span>
+        <span class="tag">В разработке</span>
+        <span class="tag">Внутренний продукт</span>
+        <span class="tag">Финтех</span>
+        <span class="tag">Сложные состояния</span>
+        <span class="tag">Работа с требованиями</span>
+        <span class="tag">Дизайн-система</span>
+      </div>
+      <h1 class="case-hero__title">Подтверждение дохода через Госуслуги</h1>
+      <p class="case-hero__summary">
+        Новый процесс во внутренней системе банка для операторов колл-центра и отделений.
+      </p>
+
+      <div class="project-meta">
+        <div>
+          <div class="project-meta__item-label">Роль</div>
+          <div class="project-meta__item-value">UX/UI дизайнер. Анализ требований, сценарии и состояния, интерфейс, компоненты, UI kit</div>
+        </div>
+        <div>
+          <div class="project-meta__item-label">Команда</div>
+          <div class="project-meta__item-value">Бизнес-заказчики, системный аналитик, разработка</div>
+        </div>
+        <div>
+          <div class="project-meta__item-label">Сроки</div>
+          <div class="project-meta__item-value">Сентябрь – ноябрь 2026</div>
+        </div>
+        <div>
+          <div class="project-meta__item-label">Инструменты</div>
+          <div class="project-meta__item-value">Figma</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section__title">Контекст</h2>
+      <p>Операторы оформляют кредиты во внутренней системе банка, работая с ней по 8–12 часов в смену. Чтобы получить кредит с подтверждением дохода, клиенту приходилось приносить справки в офис. Задача — добавить подтверждение дохода через Госуслуги прямо во время звонка или визита и заодно навести порядок в загрузке справок.</p>
+    </section>
+
+    <section class="case-section">
+      <h3 class="case-section__subtitle">Было</h3>
+      <p>При разборе вкладки «Документы» нашлось четыре проблемы. Справки о доходе лежали в одном списке со всеми документами. Кнопки «+ Следующая страница» и «+ Единый документ» не понимали даже заказчики. Пустое поле «Тип документа» под загрузкой выглядело как незаполненное. А кнопка «Подтвердить доход» на самом деле отправляла заявку клиенту в мобильный банк, и новое действие получило бы то же название.</p>
+
+      <div class="case-image">
+        <img src="../income/01_bylo.png" alt="Вкладка «Документы» в старом виде с четырьмя отмеченными проблемами" loading="lazy">
+      </div>
+
+      <h3 class="case-section__subtitle">Задача и ограничения</h3>
+      <p>Процесс новый для системы и зависит от внешних сервисов. Клиент даёт согласие на Госуслугах по ссылке из смс, банк запрашивает данные о доходе, ответ приходит до 10 минут, потом предложение пересчитывается. На каждом шаге возможны ошибки. Требования менялись по ходу, а у бизнеса и аналитики были разные взгляды на кнопки, недоступные действия и уведомления.</p>
+
+      <div class="case-image">
+        <img src="../income/02_process.png" alt="Схема процесса подтверждения через Госуслуги и его ограничения" loading="lazy">
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section__title">Процесс</h2>
+
+      <h3 class="case-section__subtitle">От требований к состояниям</h3>
+      <p>Собрала требования, матрицу проверок и список ошибок в одну таблицу из 19 сценариев. Оказалось, что по внешнему виду они сводятся к 13 вариантам блока: многие ситуации отличаются только сообщением. Для разработки это одна понятная карта вместо нескольких документов.</p>
+
+      <div class="case-image">
+        <img src="../income/03_scenarii.png" alt="Таблица 19 сценариев подтверждения дохода" loading="lazy">
+      </div>
+      <div class="case-image">
+        <img src="../income/04_bloki_A-M.png" alt="13 вариантов блока, к которым свелись 19 сценариев" loading="lazy">
+      </div>
+
+      <h3 class="case-section__subtitle">Статус: четыре итерации</h3>
+      <p>Статус прошёл путь от одного баджа до двух шагов — «согласие» и «доход». Каждую следующую версию подсказывало то, с чем элемент путали на предыдущей: пустой кружок принимали за радиобаттон, пунктир — за зону загрузки, яркую зелёную заливку — за кнопку. В финале статус светлый, без рамки и ниже кнопок, а сплошная заливка осталась только у главного действия.</p>
+
+      <div class="case-image">
+        <img src="../income/05_iteracii_statusa.png" alt="Четыре итерации статуса подтверждения" loading="lazy">
+      </div>
+
+      <h3 class="case-section__subtitle">Выбор способа</h3>
+      <p>В наброске заказчиков у каждого способа были и радиобаттон, и стрелка раскрытия, оба блока были открыты одновременно. Убрала двойное управление, а затем предложила переключатель: выбор в одну строку, переключатель, шаг «Согласие» и кнопка выровнены по одной ширине.</p>
+
+      <div class="case-image">
+        <img src="../income/06_vybor_sposoba.png" alt="От радиобаттонов с раскрытием к единому переключателю способа" loading="lazy">
+      </div>
+
+      <h3 class="case-section__subtitle">Правила, которые сняли споры</h3>
+      <p>Вместо того чтобы спорить о каждой кнопке, договорились о двух правилах. Действие внутри раздела — в блоке раздела, действие по всей заявке — в нижнем баре. Если ждём, когда кнопку можно будет нажать, — таймер на кнопке, если ждём ответ системы — таймер текстом под статусом. Правила устроили и бизнес, и аналитику и работают для любой новой кнопки. Заодно они развели два действия с одинаковым названием: отправку заявки в мобильный банк предложила назвать по действию.</p>
+
+      <div class="case-image">
+        <img src="../income/12_pravila.png" alt="Правила расположения кнопок и таймеров" loading="lazy">
+      </div>
+
+      <h3 class="case-section__subtitle">Справки</h3>
+      <p>В разделе подтверждения дохода остались только справки о доходе, остальные документы переехали в отдельный блок ниже. Вместо двух непонятных кнопок предложила одну зону загрузки: многостраничный PDF — это весь документ, фото — это страница. Тип справки выбирается над загрузкой, следующая справка добавляется ссылкой.</p>
+
+      <div class="case-image">
+        <img src="../income/13_zagruzka_spravki.png" alt="Загрузка справки: было и стало" loading="lazy">
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section__title">Финальные экраны</h2>
+
+      <div class="image-row">
+        <div>
+          <div class="case-image">
+            <img src="../income/07_final_pervyy_vhod.png" alt="Финальный экран: первый вход в подтверждение дохода" loading="lazy">
+          </div>
+          <div class="image-caption">Первый вход</div>
+        </div>
+        <div>
+          <div class="case-image">
+            <img src="../income/08_final_ozhidanie.png" alt="Финальный экран: смс доставлена, ожидание ответа" loading="lazy">
+          </div>
+          <div class="image-caption">Смс доставлена, ждём ответ</div>
+        </div>
+      </div>
+
+      <div class="image-row">
+        <div>
+          <div class="case-image">
+            <img src="../income/09_final_dohod_poluchen.png" alt="Финальный экран: доход подтверждён" loading="lazy">
+          </div>
+          <div class="image-caption">Доход подтверждён</div>
+        </div>
+        <div>
+          <div class="case-image">
+            <img src="../income/10_final_spravka.png" alt="Финальный экран: подтверждение по справке" loading="lazy">
+          </div>
+          <div class="image-caption">Подтверждение по справке</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section__title">Компоненты и UI kit</h2>
+      <p>Для экранов собрала в Figma компоненты с вариантами и свойствами: статус с четырьмя состояниями, ряд статуса со всеми сочетаниями из требований, сегмент переключателя, кнопки с таймером. UI kit проекта тоже делала сама: поля ввода со всеми состояниями, кнопки, переключатели, чекбоксы, радиобаттоны, свитчи, слайдер, таблицы, раскрывающиеся панели. Компоненты переданы в разработку. Новые состояния собираются из готовых компонентов за минуты, а если названия статусов поменяются, их достаточно переписать в свойстве.</p>
+
+      <div class="image-row image-row--three">
+        <div class="case-image">
+          <img src="../income/11_komponenty.png" alt="Компоненты: статус, ряд статуса, кнопки, переключатель" loading="lazy">
+        </div>
+        <div class="case-image">
+          <img src="../income/14_ui_kit_obzor.png" alt="Общий вид UI kit проекта" loading="lazy">
+        </div>
+        <div class="case-image">
+          <img src="../income/15_ui_kit_input.png" alt="Поля ввода UI kit во всех состояниях" loading="lazy">
+        </div>
+      </div>
+      <div class="image-row">
+        <div class="case-image">
+          <img src="../income/16_ui_kit_buttons.png" alt="Кнопки UI kit" loading="lazy">
+        </div>
+        <div class="case-image">
+          <img src="../income/17_ui_kit_checkbox_radio.png" alt="Чекбоксы и радиобаттоны UI kit" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section__title">Результат</h2>
+      <ul class="case-list">
+        <li><strong>Сценарии:</strong> 19 сценариев свели к 13 вариантам блока и таблице сообщений — основа для разработки.</li>
+        <li><strong>Правила кнопок и таймеров:</strong> договорились о правилах расположения, которые устроили и бизнес, и аналитику.</li>
+        <li><strong>Убрали дубли:</strong> дубль кнопок и путаницу одинаковых названий.</li>
+        <li><strong>Загрузка справок:</strong> стала понятной — одна зона вместо двух непонятных кнопок.</li>
+        <li><strong>Компоненты и UI kit:</strong> собраны для дальнейшей работы.</li>
+      </ul>
+      <p>Функция в разработке. Когда она запустится, добавлю данные о том, как изменилось время подтверждения дохода.</p>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section__title">Выводы</h2>
+      <p>Во внутреннем продукте интерфейс оценивают не за красоту, а за то, сколько раз оператор ошибётся за 12 часов смены. Самым полезным оказалось не нарисовать экран, а договориться о правилах, по которым экраны рисуются.</p>
+    </section>
+
+    <div class="case-footer-nav">
+      <a href="../index.html#projects" class="btn">К другим проектам</a>
+    </div>
+
+  </div>
+
+</body>
+</html>

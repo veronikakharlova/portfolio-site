@@ -118,7 +118,30 @@
   .case-hero__summary {
     font-size: 17px;
     color: var(--color-text-muted);
-    margin: 0;
+    margin: 0 0 32px;
+    max-width: 620px;
+  }
+
+  /* PROJECT META GRID */
+  .project-meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    padding: 24px 0;
+    border-top: 1px solid #ECECEE;
+    border-bottom: 1px solid #ECECEE;
+  }
+
+  .project-meta__item-label {
+    font-size: 13px;
+    color: var(--color-text-faint);
+    margin-bottom: 6px;
+  }
+
+  .project-meta__item-value {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.4;
   }
 
   /* CASE SECTIONS */
@@ -176,6 +199,7 @@
   @media (max-width: 640px) {
     .site-header, .container { padding-left: 20px; padding-right: 20px; }
     .case-hero__title { font-size: 28px; }
+    .project-meta { grid-template-columns: repeat(2, 1fr); row-gap: 20px; }
   }
 </style>
 </head>
@@ -197,6 +221,22 @@
       <p class="case-hero__summary">
         Комплексная стратегия привлечения молодёжи к открытию брокерских счетов в Ренессанс Банке, разработанная в составе команды стажёров «Марс» — проект занял 1 место.
       </p>
+
+      <div class="project-meta">
+        <div>
+          <div class="project-meta__item-label">Роль</div>
+          <div class="project-meta__item-value">UX/UI дизайнер — спроектировала все экраны (раздел «Инвестиции», визуальные концепты маскота)</div>
+        </div>
+        <div>
+          <div class="project-meta__item-label">Команда</div>
+          <div class="project-meta__item-value">Команда стажёров «Марс», Ренессанс Банк</div>
+        </div>
+        <div>
+          <div class="project-meta__item-label">Инструменты</div>
+          <div class="project-meta__item-value">Figma</div>
+        </div>
+      </div>
+
       <p style="margin-top: 20px;">
         <a href="../assets/brokerage-presentation.pptx" class="btn btn--outline">Скачать презентацию проекта (.pptx)</a>
       </p>

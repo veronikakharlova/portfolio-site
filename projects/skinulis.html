@@ -118,7 +118,30 @@
   .case-hero__summary {
     font-size: 17px;
     color: var(--color-text-muted);
-    margin: 0;
+    margin: 0 0 32px;
+    max-width: 620px;
+  }
+
+  /* PROJECT META GRID */
+  .project-meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    padding: 24px 0;
+    border-top: 1px solid #ECECEE;
+    border-bottom: 1px solid #ECECEE;
+  }
+
+  .project-meta__item-label {
+    font-size: 13px;
+    color: var(--color-text-faint);
+    margin-bottom: 6px;
+  }
+
+  .project-meta__item-value {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.4;
   }
 
   /* CASE SECTIONS */
@@ -189,6 +212,7 @@
 
     .site-header, .container { padding-left: 20px; padding-right: 20px; }
     .case-hero__title { font-size: 28px; }
+    .project-meta { grid-template-columns: repeat(2, 1fr); row-gap: 20px; }
   }
 </style>
 </head>
@@ -210,6 +234,22 @@
       <p class="case-hero__summary">
         Функция мобильного приложения Ренессанс Банка, спроектированная на хакатоне, — разделить общий счёт между друзьями вплоть до конкретных позиций чека и собрать деньги в одном месте.
       </p>
+
+      <div class="project-meta">
+        <div>
+          <div class="project-meta__item-label">Роль</div>
+          <div class="project-meta__item-value">UX/UI дизайнер — дизайн и питч перед жюри целиком, соло</div>
+        </div>
+        <div>
+          <div class="project-meta__item-label">Команда</div>
+          <div class="project-meta__item-value">Участвовала в хакатоне одна, за 24 часа</div>
+        </div>
+        <div>
+          <div class="project-meta__item-label">Инструменты</div>
+          <div class="project-meta__item-value">Figma</div>
+        </div>
+      </div>
+
       <p style="margin-top: 20px;">
         <a href="https://www.behance.net/gallery/191150123/Hackathon-2023-razdelenie-scheta-v-renessans-banke/modules/1081164769" class="btn btn--outline" target="_blank" rel="noopener">Полный кейс на Behance</a>
       </p>
@@ -251,12 +291,12 @@
         <img src="../hackathon/web-remind.jpg" alt="Итоговый экран события со статусом оплаты участников и кнопкой «Напомнить»">
       </div>
 
-      <p>Готовый прототип команда защищала в формате питча перед жюри хакатона.</p>
+      <p>Готовый прототип защищала в формате питча перед жюри хакатона сама.</p>
     </section>
 
     <section class="case-section">
       <h2 class="case-section__title">Результат</h2>
-      <p>За отведённое время команда подготовила рабочий прототип функции «Скинулись» — от создания события и деления счёта по позициям чека до напоминаний неплательщикам — и представила его на защите жюри хакатона. Полную версию кейса с макетами выложила на Behance (ссылка выше).</p>
+      <p>За отведённое время подготовила рабочий прототип функции «Скинулись» — от создания события и деления счёта по позициям чека до напоминаний неплательщикам — и представила его на защите жюри хакатона. Полную версию кейса с макетами выложила на Behance (ссылка выше).</p>
     </section>
 
     <div class="case-footer-nav">

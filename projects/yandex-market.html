@@ -118,7 +118,30 @@
   .case-hero__summary {
     font-size: 17px;
     color: var(--color-text-muted);
-    margin: 0;
+    margin: 0 0 32px;
+    max-width: 620px;
+  }
+
+  /* PROJECT META GRID */
+  .project-meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    padding: 24px 0;
+    border-top: 1px solid #ECECEE;
+    border-bottom: 1px solid #ECECEE;
+  }
+
+  .project-meta__item-label {
+    font-size: 13px;
+    color: var(--color-text-faint);
+    margin-bottom: 6px;
+  }
+
+  .project-meta__item-value {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.4;
   }
 
   /* CASE SECTIONS */
@@ -170,6 +193,7 @@
   @media (max-width: 640px) {
     .site-header, .container { padding-left: 20px; padding-right: 20px; }
     .case-hero__title { font-size: 28px; }
+    .project-meta { grid-template-columns: repeat(2, 1fr); row-gap: 20px; }
   }
 </style>
 </head>
@@ -184,18 +208,33 @@
     <section class="case-hero">
       <a href="../index.html#projects" class="back-link case-hero__back">← Все проекты</a>
       <div class="case-hero__meta">
-        <span class="tag">Яндекс Плюс · Mobile</span>
+        <span class="tag">Учебный проект · Яндекс Практикум</span>
         <span class="tag">2024</span>
       </div>
       <h1 class="case-hero__title">Реферальная программа Яндекс Плюса</h1>
       <p class="case-hero__summary">
-        Редизайн лендинга и экранов реферальной программы — механики, с помощью которой пользователи приглашают друзей в Плюс и получают за это баллы.
+        Самостоятельный редизайн лендинга и экранов реферальной программы Яндекс Плюса — учебный кейс курса «Продуктовый подход для дизайнеров», не коммерческий заказ.
       </p>
+
+      <div class="project-meta">
+        <div>
+          <div class="project-meta__item-label">Роль</div>
+          <div class="project-meta__item-value">UX/UI дизайнер — соло, учебное задание</div>
+        </div>
+        <div>
+          <div class="project-meta__item-label">Команда</div>
+          <div class="project-meta__item-value">Соло-проект, курс «Продуктовый подход для дизайнеров» (Яндекс Практикум)</div>
+        </div>
+        <div>
+          <div class="project-meta__item-label">Инструменты</div>
+          <div class="project-meta__item-value">Figma</div>
+        </div>
+      </div>
     </section>
 
     <section class="case-section">
       <h2 class="case-section__title">Задача</h2>
-      <p>Редизайн лендинга реферальной программы Яндекс Плюса: нужно было повлиять на то, как пользователь взаимодействует с программой — от момента, когда узнаёт о ней, до приглашения друга. Глобальная цель команды Плюса — рост ARPU (среднего дохода на пользователя), и заметная, понятная реферальная программа была одним из рычагов для этого.</p>
+      <p>Учебное задание курса «Продуктовый подход для дизайнеров» (Яндекс Практикум, 2023–2024): взяла за основу реальный продукт — реферальную программу Яндекс Плюса — и самостоятельно, без брифа от компании, сформулировала задачу редизайна лендинга. Предположила вероятную бизнес-цель такой программы — рост ARPU (среднего дохода на пользователя) — и строила решение вокруг неё: нужно было повлиять на то, как пользователь взаимодействует с программой, от момента, когда узнаёт о ней, до приглашения друга.</p>
     </section>
 
     <section class="case-section">
