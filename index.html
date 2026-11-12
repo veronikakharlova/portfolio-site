@@ -801,6 +801,8 @@
     }
   }
 </style>
+<link rel="stylesheet" href="assets/theme-code.css">
+<meta name="theme-color" content="#111113">
 </head>
 <body>
 
@@ -818,14 +820,10 @@
 
   <!-- HERO -->
   <section class="hero container">
-    <div class="hero__portrait-wrap">
-      <div class="hero__portrait">
-        <img src="assets/portrait.jpg" alt="Портрет Вероники Харловой">
-      </div>
-    </div>
     <div class="hero__content">
-      <h1 class="hero__title">Вероника Харлова</h1>
-      <p class="hero__role">UX/UI дизайнер</p>
+      <div class="hero__hello" aria-hidden="true"><b>&gt;</b> console.log(<b>"hello, world"</b>)</div>
+      <h1 class="hero__title"><span class="hero__first">Вероника</span><span class="hero__last">Харлова</span></h1>
+      <p class="hero__role">// UX/UI дизайнер</p>
       <p class="hero__bio">
         UX/UI-дизайнер с инженерным прошлым. До дизайна два года писала ПО
         на C++ для проверки параметров спутников в космической отрасли —
@@ -838,6 +836,17 @@
         <a href="https://t.me/Nika_Kharlova" class="btn btn--large" target="_blank" rel="noopener">Связаться со мной</a>
         <a href="assets/resume-veronika-kharlova.pdf" class="btn btn--large btn--ghost" download>Скачать резюме</a>
       </div>
+    </div>
+    <div class="hero__portrait-wrap">
+      <figure class="hero__sel">
+        <img src="assets/portrait-cut.webp" alt="Портрет Вероники Харловой" width="900" height="1350">
+        <span class="hero__sel-name" aria-hidden="true">veronika.jpg</span>
+        <span class="hero__sel-size" aria-hidden="true">400 × 600</span>
+        <i class="h-tl"></i><i class="h-tr"></i><i class="h-bl"></i><i class="h-br"></i><i class="h-tm"></i><i class="h-bm"></i>
+      </figure>
+      <span class="sticker sticker--hot" style="left:2%; top:58%;" aria-hidden="true">&lt;UX/&gt;</span>
+      <span class="sticker sticker--line" style="right:0; top:12%;" aria-hidden="true">{ UI }</span>
+      <span class="sticker sticker--wine" style="right:4%; bottom:16%;" aria-hidden="true">C++ → FIGMA</span>
     </div>
   </section>
 
@@ -868,7 +877,7 @@
   <!-- PROJECTS -->
   <section id="projects" class="bg-alt">
     <div class="container">
-      <h2 class="section-title">Проекты</h2>
+      <h2 class="section-title" data-file="cases/">Проекты</h2>
       <div class="project-grid">
 
         <a class="project-card" href="projects/income-confirmation.html">
@@ -1006,7 +1015,7 @@
   <!-- EXPERIENCE -->
   <section id="experience">
     <div class="container content-narrow">
-      <h2 class="section-title">Опыт работы</h2>
+      <h2 class="section-title" data-file="experience.md">Опыт работы</h2>
       <div class="timeline">
 
         <div class="timeline-row">
@@ -1075,7 +1084,7 @@
   <!-- SKILLS -->
   <section id="skills" class="bg-alt">
     <div class="container">
-      <h2 class="section-title">Навыки</h2>
+      <h2 class="section-title" data-file="skills.json">Навыки</h2>
       <div class="skills-grid">
         <div class="skill-group">
           <h3 class="skill-group__title">Figma</h3>
@@ -1133,7 +1142,7 @@
   <!-- TALKS & AWARDS -->
   <section id="awards">
     <div class="container content-narrow">
-      <h2 class="section-title">Выступления и награды</h2>
+      <h2 class="section-title" data-file="awards.log">Выступления и награды</h2>
       <div class="timeline">
 
         <div class="timeline-row">
@@ -1170,7 +1179,7 @@
   <!-- EDUCATION -->
   <section id="education" class="bg-alt">
     <div class="container content-narrow">
-      <h2 class="section-title">Образование</h2>
+      <h2 class="section-title" data-file="education.md">Образование</h2>
       <h3 class="education-group">Высшее</h3>
       <div class="education-list">
         <div class="timeline-row education-row">
