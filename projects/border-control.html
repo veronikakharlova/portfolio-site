@@ -144,6 +144,217 @@
     line-height: 1.4;
   }
 
+  /* SCENARIO MAP */
+  .smap {
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-card);
+    padding: 32px;
+    margin: 32px 0;
+  }
+
+  .smap__entry {
+    background: #FFFFFF;
+    border-radius: 14px;
+    padding: 16px 20px;
+    max-width: 420px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .smap__entry-title {
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .smap__entry-desc {
+    font-size: 13px;
+    color: var(--color-text-faint);
+    margin-top: 2px;
+  }
+
+  .smap__split {
+    position: relative;
+    height: 40px;
+    margin: 0 25%;
+    border-left: 1.5px solid #D4D4D8;
+    border-right: 1.5px solid #D4D4D8;
+    border-top: 1.5px solid #D4D4D8;
+    border-radius: 12px 12px 0 0;
+    margin-top: 20px;
+  }
+
+  .smap__split::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -21px;
+    height: 20px;
+    border-left: 1.5px solid #D4D4D8;
+  }
+
+  .smap__roles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .smap__role-head {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .smap__role-name {
+    display: inline-block;
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 18px;
+    border-radius: var(--radius-pill);
+  }
+
+  .smap__role-desc {
+    font-size: 13px;
+    color: var(--color-text-faint);
+    margin-top: 8px;
+  }
+
+  .smap__scenarios {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .smap__card {
+    background: #FFFFFF;
+    border-radius: 14px;
+    padding: 18px 20px 20px;
+  }
+
+  .smap__card-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .smap__card-title {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.35;
+  }
+
+  .smap__badge {
+    flex-shrink: 0;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-accent-text);
+    background: var(--color-accent-bg);
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+  }
+
+  .smap__steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .smap__steps li {
+    position: relative;
+    padding: 0 0 12px 22px;
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--color-text-muted);
+  }
+
+  .smap__steps li::before {
+    content: "";
+    position: absolute;
+    left: 3px;
+    top: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    border: 1.5px solid #B8B8BE;
+  }
+
+  .smap__steps li::after {
+    content: "";
+    position: absolute;
+    left: 7.5px;
+    top: 17px;
+    bottom: 1px;
+    border-left: 1.5px solid #E4E4E7;
+  }
+
+  .smap__steps li:last-child {
+    padding-bottom: 0;
+  }
+
+  .smap__steps li:last-child::after {
+    display: none;
+  }
+
+  .smap__steps li.is-result {
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  .smap__steps li.is-result::before {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  .smap__section {
+    font-size: 12px;
+    color: var(--color-text-faint);
+  }
+
+  .smap__fork {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-top: 6px;
+  }
+
+  .smap__fork span {
+    font-size: 13px;
+    background: var(--color-bg-alt);
+    border-radius: 10px;
+    padding: 6px 10px;
+    line-height: 1.35;
+  }
+
+  .smap__fork b {
+    font-weight: 500;
+    color: var(--color-text);
+  }
+
+  .smap__legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    margin-top: 22px;
+    font-size: 13px;
+    color: var(--color-text-faint);
+  }
+
+  .smap__legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .smap__legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-accent);
+  }
+
   /* CASE SECTIONS */
   .case-section {
     padding: 40px 0;
@@ -260,6 +471,12 @@
     border-radius: var(--radius-pill);
   }
 
+  @media (max-width: 760px) {
+    .smap { padding: 20px 16px; }
+    .smap__split { display: none; }
+    .smap__roles { grid-template-columns: 1fr; gap: 28px; margin-top: 24px; }
+  }
+
   @media (max-width: 640px) {
     .site-header, .container { padding-left: 20px; padding-right: 20px; }
     .case-hero__title { font-size: 28px; }
@@ -311,6 +528,138 @@
     <section class="case-section">
       <h2 class="case-section__title">Процесс</h2>
       <p>Прямых интервью с пользователями не проводила: данные пограничного контроля закрытые, и все вводные, кто работает с системой, какие сценарии критичны, какие есть ограничения, передавал заказчик уже в виде требований. На этой основе составила карту сценариев для двух ролей: инспектора на пункте пропуска, работающего в реальном времени, и администратора системы.</p>
+
+      <div class="smap" role="figure" aria-label="Карта сценариев Control для двух ролей">
+        <div class="smap__entry">
+          <div class="smap__entry-title">Авторизация</div>
+          <div class="smap__entry-desc">Логин, пароль и язык интерфейса. Дальше роль определяет, какие разделы доступны</div>
+        </div>
+        <div class="smap__split" aria-hidden="true"></div>
+
+        <div class="smap__roles">
+          <div>
+            <div class="smap__role-head">
+              <span class="smap__role-name">Инспектор</span>
+              <div class="smap__role-desc">Пункт пропуска, решение в реальном времени</div>
+            </div>
+            <div class="smap__scenarios">
+
+              <div class="smap__card">
+                <div class="smap__card-head">
+                  <div class="smap__card-title">Проверить человека на границе</div>
+                </div>
+                <ol class="smap__steps">
+                  <li>Найти пересечение по имени или документу <div class="smap__section">Список пассажиров</div></li>
+                  <li>Открыть карточку поездки: фото, скан документа, отпечатки, данные о поездке <div class="smap__section">Карточка поездки</div></li>
+                  <li>Сверить разрешения, историю въездов и выездов, детей <div class="smap__section">Вкладки карточки</div></li>
+                  <li class="is-result">Решение по пересечению</li>
+                </ol>
+              </div>
+
+              <div class="smap__card">
+                <div class="smap__card-head">
+                  <div class="smap__card-title">Проверить или изменить разрешение</div>
+                </div>
+                <ol class="smap__steps">
+                  <li>Найти разрешение по туристу или статусу <div class="smap__section">Список разрешений</div></li>
+                  <li>Открыть разрешение и проверить срок и цель</li>
+                  <li>Изменить статус: «Открыт» или «Приостановлен»</li>
+                  <li class="is-result">Статус виден в карточке поездки</li>
+                </ol>
+              </div>
+
+              <div class="smap__card">
+                <div class="smap__card-head">
+                  <div class="smap__card-title">Оформить новую поездку</div>
+                  <span class="smap__badge">Trips</span>
+                </div>
+                <ol class="smap__steps">
+                  <li>Отсканировать документ, система распознаёт данные</li>
+                  <li>Турист уже есть в системе?
+                    <div class="smap__fork">
+                      <span><b>Да:</b> подтвердить найденного</span>
+                      <span><b>Нет:</b> создать нового</span>
+                    </div>
+                  </li>
+                  <li>Заполнить детали поездки, найти транспорт по номеру</li>
+                  <li>Добавить детей, если едут с туристом</li>
+                  <li class="is-result">Поездка оформлена</li>
+                </ol>
+              </div>
+
+            </div>
+          </div>
+
+          <div>
+            <div class="smap__role-head">
+              <span class="smap__role-name">Администратор</span>
+              <div class="smap__role-desc">Доступы и техническое состояние системы</div>
+            </div>
+            <div class="smap__scenarios">
+
+              <div class="smap__card">
+                <div class="smap__card-head">
+                  <div class="smap__card-title">Выдать доступ сотруднику</div>
+                </div>
+                <ol class="smap__steps">
+                  <li>Найти пользователя через фильтр <div class="smap__section">Пользователи, Организации</div></li>
+                  <li>Создать пользователя в модальном окне: ФИО, роль, контакты, место работы</li>
+                  <li class="is-result">Сотрудник входит со своей ролью</li>
+                </ol>
+              </div>
+
+              <div class="smap__card">
+                <div class="smap__card-head">
+                  <div class="smap__card-title">Найти и устранить сбой сервиса</div>
+                  <span class="smap__badge">Обновление 2025</span>
+                </div>
+                <ol class="smap__steps">
+                  <li>Увидеть процесс со статусом Down <div class="smap__section">Сервисы</div></li>
+                  <li>Раскрыть процесс и найти упавшую задачу, открыть лог</li>
+                  <li>Поправить расписание и параметры, перезапустить или остановить задачу</li>
+                  <li class="is-result">Процесс снова Up</li>
+                </ol>
+              </div>
+
+              <div class="smap__card">
+                <div class="smap__card-head">
+                  <div class="smap__card-title">Разобрать ошибки файлов</div>
+                  <span class="smap__badge">Обновление 2025</span>
+                </div>
+                <ol class="smap__steps">
+                  <li>Отфильтровать по статусу «Ошибка обработки» и серверу <div class="smap__section">Файлы</div></li>
+                  <li>Прочитать детали ошибки, выбрать файлы массово</li>
+                  <li>Обработать повторно или заменить файл, выгрузить отчёт</li>
+                  <li class="is-result">Данные синхронизированы</li>
+                </ol>
+              </div>
+
+              <div class="smap__card">
+                <div class="smap__card-head">
+                  <div class="smap__card-title">Обновить справочник</div>
+                  <span class="smap__badge">Обновление 2025</span>
+                </div>
+                <ol class="smap__steps">
+                  <li>Выбрать справочник <div class="smap__section">Справочники</div>
+                    <div class="smap__fork">
+                      <span><b>Midas:</b> только просмотр</span>
+                      <span><b>Control:</b> можно редактировать</span>
+                    </div>
+                  </li>
+                  <li>Найти элемент, при необходимости показать удалённые</li>
+                  <li class="is-result">Изменение сохраняется в истории</li>
+                </ol>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="smap__legend">
+          <span class="smap__legend-item"><span class="smap__legend-dot"></span>Результат сценария</span>
+          <span class="smap__legend-item"><span class="smap__badge">Trips</span><span class="smap__badge">Обновление 2025</span> Этапы после первой версии</span>
+        </div>
+      </div>
       <p>Спроектировала шесть ключевых разделов, опираясь на два рабочих принципа. Первый: свести данные о конкретной поездке в одну карточку с цветовой кодировкой статусов, чтобы инспектор тратил меньше времени на поиск информации и реже ошибался при принятии решения. Второй: физически разделить сценарии инспектора и администратора, чтобы снизить риск случайных действий с чувствительными данными.</p>
 
       <h3 class="case-section__subtitle">Авторизация</h3>
