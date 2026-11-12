@@ -234,7 +234,36 @@
     border-radius: var(--radius-pill);
   }
 
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin: 8px 0 24px;
+  }
+
+  .stat-card {
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-card);
+    padding: 28px 20px;
+    text-align: center;
+  }
+
+  .stat-card__number {
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--color-accent);
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .stat-card__label {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+  }
+
   @media (max-width: 640px) {
+    .stat-grid { grid-template-columns: 1fr; }
     .site-header, .container { padding-left: 20px; padding-right: 20px; }
     .case-hero__title { font-size: 28px; }
     .project-meta { grid-template-columns: repeat(2, 1fr); row-gap: 20px; }
@@ -320,6 +349,20 @@
 
     <section class="case-section">
       <h2 class="case-section__title">Результат</h2>
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-card__number">3 месяца</div>
+          <div class="stat-card__label">до релиза MVP</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__number">30+ процессов</div>
+          <div class="stat-card__label">зафиксировали и проработали вместе с заказчиком</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__number">500+</div>
+          <div class="stat-card__label">сотрудников компании в одной HR-системе вместо разрозненных таблиц</div>
+        </div>
+      </div>
       <ul class="case-list">
         <li><strong>MVP за 3 месяца.</strong> Уложились в срок, несмотря на объём требований: 30+ бизнес-процессов, зафиксированных и проработанных в диалоге с заказчиком.</li>
         <li><strong>Единая система вместо разрозненных таблиц.</strong> HR-задачи, данные о сотрудниках и аналитика по подразделениям теперь собраны в одном интерфейсе.</li>

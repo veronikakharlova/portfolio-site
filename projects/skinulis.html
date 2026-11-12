@@ -215,7 +215,36 @@
     margin: 0;
   }
 
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin: 8px 0 24px;
+  }
+
+  .stat-card {
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-card);
+    padding: 28px 20px;
+    text-align: center;
+  }
+
+  .stat-card__number {
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--color-accent);
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .stat-card__label {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+  }
+
   @media (max-width: 640px) {
+    .stat-grid { grid-template-columns: 1fr; }
     .image-row { grid-template-columns: 1fr; }
 
     .site-header, .container { padding-left: 20px; padding-right: 20px; }
@@ -305,6 +334,20 @@
 
     <section class="case-section">
       <h2 class="case-section__title">Результат</h2>
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-card__number">24 часа</div>
+          <div class="stat-card__label">на прототип в одиночку</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__number">Приз</div>
+          <div class="stat-card__label">зрительских симпатий на хакатоне</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__number">2 способа</div>
+          <div class="stat-card__label">деления: поровну или по позициям чека</div>
+        </div>
+      </div>
       <p>За отведённое время подготовила рабочий прототип функции «Скинулись» — от создания события и деления счёта по позициям чека до напоминаний неплательщикам — и представила его на защите жюри хакатона. Проект получил приз зрительских симпатий. Полную версию кейса с макетами выложила на Behance (ссылка выше).</p>
     </section>
 

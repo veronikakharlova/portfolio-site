@@ -204,7 +204,36 @@
     border: 1px solid var(--color-accent-bg);
   }
 
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin: 8px 0 24px;
+  }
+
+  .stat-card {
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-card);
+    padding: 28px 20px;
+    text-align: center;
+  }
+
+  .stat-card__number {
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--color-accent);
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .stat-card__label {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+  }
+
   @media (max-width: 640px) {
+    .stat-grid { grid-template-columns: 1fr; }
     .site-header, .container { padding-left: 20px; padding-right: 20px; }
     .case-hero__title { font-size: 28px; }
     .project-meta { grid-template-columns: repeat(2, 1fr); row-gap: 20px; }
@@ -275,6 +304,20 @@
 
     <section class="case-section">
       <h2 class="case-section__title">Результат</h2>
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-card__number">1 место</div>
+          <div class="stat-card__label">среди проектов потока стажёров</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__number">18 млн ₽</div>
+          <div class="stat-card__label">бюджет стратегии на 16 месяцев</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__number">93%</div>
+          <div class="stat-card__label">клиентов банка знакомы с криптовалютой, по опросу</div>
+        </div>
+      </div>
       <p>Проект занял 1 место среди работ потока стажёров. Команда представила банку целостную воронку — от первого касания с молодёжной аудиторией через студенческую карту и коллаборации с блогерами до удержания через геймификацию и криптоброкеридж, — с оценкой бюджета и сроков на каждом этапе.</p>
     </section>
 

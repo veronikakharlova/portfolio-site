@@ -490,7 +490,36 @@
     .smap__roles { grid-template-columns: 1fr; gap: 28px; margin-top: 24px; }
   }
 
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin: 8px 0 24px;
+  }
+
+  .stat-card {
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-card);
+    padding: 28px 20px;
+    text-align: center;
+  }
+
+  .stat-card__number {
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--color-accent);
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .stat-card__label {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+  }
+
   @media (max-width: 640px) {
+    .stat-grid { grid-template-columns: 1fr; }
     .site-header, .container { padding-left: 20px; padding-right: 20px; }
     .case-hero__title { font-size: 28px; }
     .project-meta { grid-template-columns: repeat(2, 1fr); row-gap: 20px; }
@@ -829,6 +858,20 @@
 
     <section class="case-section">
       <h2 class="case-section__title">Результат</h2>
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-card__number">9 разделов</div>
+          <div class="stat-card__label">спроектировала для инспектора и администратора</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__number">2 роли</div>
+          <div class="stat-card__label">со сценариями, разведёнными по разным разделам</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__number">Ready for dev</div>
+          <div class="stat-card__label">все экраны переданы в разработку</div>
+        </div>
+      </div>
       <p>Интерфейс объединил данные, которые раньше приходилось сверять вручную по нескольким системам, в единый экран проверки — от карточки конкретной поездки до администрирования самой системы. Все экраны получили в Figma статус «Ready for dev» и в этом виде переданы в разработку: авторизация, админ-панель, карточка поездки, список пассажиров, разрешения, пошаговый флоу оформления поездки инспектором, а в обновлении 2025 года ещё файлы, сервисы и справочники.</p>
     </section>
 
