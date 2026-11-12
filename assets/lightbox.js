@@ -22,7 +22,7 @@
     '.lb__btn{position:absolute;display:grid;place-items:center;width:44px;height:44px;border:0;border-radius:999px;' +
       'background:rgba(255,255,255,.12);color:#fff;font-size:22px;line-height:1;cursor:pointer;transition:background .15s}' +
     '.lb__btn:hover{background:rgba(255,255,255,.24)}' +
-    '.lb__btn:focus-visible{outline:2px solid #B4573C;outline-offset:2px}' +
+    '.lb__btn:focus-visible{outline:2px solid #7A2A38;outline-offset:2px}' +
     '.lb__close{top:12px;right:16px}' +
     '.lb__prev{left:16px;top:50%;transform:translateY(-50%)}' +
     '.lb__next{right:16px;top:50%;transform:translateY(-50%)}' +
