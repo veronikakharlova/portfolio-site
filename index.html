@@ -389,6 +389,129 @@
     line-height: 1.5;
   }
 
+  /* ---------- STATS ---------- */
+
+  .stats {
+    padding-top: 0;
+    padding-bottom: 88px;
+  }
+
+  .stats__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .stat {
+    background: #FFFFFF;
+    border-radius: var(--radius-card);
+    padding: 28px 24px;
+    box-shadow: 0 1px 0 rgba(28, 28, 30, 0.04);
+  }
+
+  .stat__value {
+    font-size: 52px;
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-accent);
+    margin-bottom: 10px;
+    white-space: nowrap;
+  }
+
+  .stat__value small {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin-left: 4px;
+  }
+
+  .stat__label {
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--color-text-muted);
+  }
+
+  /* ---------- SKILLS ---------- */
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .skill-group {
+    background: #FFFFFF;
+    border-radius: var(--radius-card);
+    padding: 28px;
+  }
+
+  .skill-group__title {
+    font-size: 17px;
+    font-weight: 500;
+    margin: 0 0 18px;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .skill-tags li {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    background: var(--color-bg-alt);
+    padding: 7px 14px;
+    border-radius: var(--radius-pill);
+  }
+
+  /* ---------- TALKS & AWARDS ---------- */
+
+  .award-place {
+    display: inline-block;
+    background: var(--color-accent-bg);
+    color: var(--color-accent-text);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: var(--radius-pill);
+    margin-bottom: 10px;
+  }
+
+  .award-desc {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .award-desc a {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .award-desc a:hover {
+    text-decoration: underline;
+  }
+
+  .timeline-row__note {
+    color: var(--color-text-faint);
+    font-weight: 400;
+  }
+
+  @media (max-width: 960px) {
+    .stats__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
   /* ---------- CONTACT ---------- */
 
   .contact {
@@ -501,6 +624,30 @@
       padding: 56px 0;
     }
 
+    .stats {
+      padding-bottom: 56px;
+    }
+
+    .stats__grid {
+      gap: 12px;
+    }
+
+    .stat {
+      padding: 20px 16px;
+    }
+
+    .stat__value {
+      font-size: 38px;
+    }
+
+    .stat__value small {
+      font-size: 16px;
+    }
+
+    .stat__label {
+      font-size: 14px;
+    }
+
     .timeline-row,
     .education-row {
       grid-template-columns: 1fr;
@@ -542,6 +689,30 @@
         в его интерфейсе.
       </p>
       <a href="#contact" class="btn btn--large">Связаться со мной</a>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats" aria-label="Достижения в цифрах">
+    <div class="container">
+      <div class="stats__grid">
+        <div class="stat">
+          <div class="stat__value">3<small>года</small></div>
+          <div class="stat__label">проектирую интерфейсы для B2B-продуктов и банка</div>
+        </div>
+        <div class="stat">
+          <div class="stat__value">3<small>запуска</small></div>
+          <div class="stat__label">спутников за 2 года разработки ПО в НПО Лавочкина</div>
+        </div>
+        <div class="stat">
+          <div class="stat__value">3<small>награды</small></div>
+          <div class="stat__label">1-е и 2-е место и приз зрительских симпатий</div>
+        </div>
+        <div class="stat">
+          <div class="stat__value">2,6×</div>
+          <div class="stat__label">быстрее заполнение карты пациента с ВетМедкартой</div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -673,7 +844,7 @@
               <span class="project-card__year">2023</span>
             </div>
             <h3 class="project-card__title">«Скинулись» — делим счёт с друзьями</h3>
-            <p class="project-card__desc">Функция мобильного приложения Ренессанс Банка для разделения счёта между друзьями</p>
+            <p class="project-card__desc">Функция мобильного приложения Ренессанс Банка для разделения счёта между друзьями, приз зрительских симпатий</p>
           </div>
         </a>
 
@@ -691,7 +862,7 @@
           <div class="timeline-row__period">2025</div>
           <div>
             <div class="timeline-row__role">UX/UI дизайнер</div>
-            <div class="timeline-row__company">Lesasoft</div>
+            <div class="timeline-row__company">Lesasoft <span class="timeline-row__note">· параллельно, проектная работа</span></div>
             <ul class="timeline-row__bullets">
               <li>Работала над проектами сибирской компании по разработке ПО на заказ Lesasoft</li>
               <li>Спроектировала биржу для поиска исполнителей и заказчиков</li>
@@ -736,8 +907,91 @@
             <ul class="timeline-row__bullets">
               <li>Проектировала интерфейсы в QT Designer, разрабатывала на C++ ПО для проверки параметров спутников</li>
               <li>Проектировала наземное ПО систем управления космическими аппаратами</li>
-              <li>Участвовала в запусках метеоспутников (OneWeb, «Электро-2», «Луна-Глоб»)</li>
+              <li>Участвовала в запусках космических аппаратов (OneWeb, «Электро-2», «Луна-Глоб»)</li>
             </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="bg-alt">
+    <div class="container">
+      <h2 class="section-title">Навыки</h2>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <h3 class="skill-group__title">Исследования и UX</h3>
+          <ul class="skill-tags">
+            <li>Конкурентный анализ</li>
+            <li>Ролевые портреты</li>
+            <li>Карты сценариев</li>
+            <li>User flow</li>
+            <li>Прототипирование</li>
+            <li>Юзабилити-тестирование</li>
+            <li>Продуктовые метрики</li>
+            <li>Требования вместе с аналитиками</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3 class="skill-group__title">Интерфейсы и UI</h3>
+          <ul class="skill-tags">
+            <li>UI-киты</li>
+            <li>Компоненты с вариантами</li>
+            <li>B2B и внутренние системы</li>
+            <li>Таблицы и сложные формы</li>
+            <li>Мобильные приложения</li>
+            <li>Мультиязычные интерфейсы</li>
+            <li>Передача в разработку</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3 class="skill-group__title">Инструменты и технологии</h3>
+          <ul class="skill-tags">
+            <li>Figma</li>
+            <li>HTML/CSS</li>
+            <li>Python</li>
+            <li>C++</li>
+            <li>Qt Designer</li>
+            <li>Claude</li>
+            <li>Telegram Bot API</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TALKS & AWARDS -->
+  <section id="awards">
+    <div class="container content-narrow">
+      <h2 class="section-title">Выступления и награды</h2>
+      <div class="timeline">
+
+        <div class="timeline-row">
+          <div class="timeline-row__period">2026</div>
+          <div>
+            <span class="award-place">2-е место</span>
+            <div class="timeline-row__role">Вайбкодинг-хакатон Zamesin School</div>
+            <p class="award-desc">Вдвоём с напарницей сделали голосового ассистента для ветврачей и показали его на демо. <a href="projects/vetmedkarta.html">Кейс ВетМедкарта →</a></p>
+          </div>
+        </div>
+
+        <div class="timeline-row">
+          <div class="timeline-row__period">2023</div>
+          <div>
+            <span class="award-place">Приз зрительских симпатий</span>
+            <div class="timeline-row__role">Хакатон Ренессанс Банка и НИУ МЭИ</div>
+            <p class="award-desc">Сама представила жюри прототип функции разделения счёта между друзьями. <a href="projects/skinulis.html">Кейс «Скинулись» →</a></p>
+          </div>
+        </div>
+
+        <div class="timeline-row">
+          <div class="timeline-row__period">2023</div>
+          <div>
+            <span class="award-place">1-е место</span>
+            <div class="timeline-row__role">Конкурс проектов стажёров Ренессанс Банка</div>
+            <p class="award-desc">Защищали перед менторами и бизнесом стратегию привлечения молодёжи в брокеридж. <a href="projects/brokerage.html">Кейс →</a></p>
           </div>
         </div>
 
